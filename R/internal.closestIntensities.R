@@ -9,21 +9,21 @@
 #' @export
 #'
 #' @examples
-internal.closestIntensities = function(irradiance_matrix, nEvents, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=helio.dyna.leds$wavelength){
+internal.closestIntensities = function(irradiance_matrix, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=helio.dyna.leds$wavelength){
 
   # Setup
-  calib = internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
+  calib = LightFitR::internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
 
   ## Checks
-  helio.checkFormat(irradiance_matrix)
-  helio.checkWhite(irradiance_matrix)
-  checkRange(irradiance_matrix, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+  LightFitR::helio.checkFormat(irradiance_matrix)
+  LightFitR::helio.checkWhite(irradiance_matrix)
+  LightFitR::checkRange(irradiance_matrix, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 
   # Calculate closest
   closestIntensityMatrix = sapply(1:(nrow(helio.dyna.leds)-1), function(a){ # Go through each LED and calculate the closest we can get with calibration data
     intendedSubset = c(as.numeric(irradiance_matrix[a,]))
 
-    criteria = (calib$led == helio.dyna.leds[a, 'wavelength']) & (round(calib$wavelength) == round(peaks[a]))
+    criteria = (calib$led == LightFitR::helio.dyna.leds[a, 'wavelength']) & (round(calib$wavelength) == round(peaks[a]))
     calibSubset = calib[criteria,] #subset calib data based on the led in question, and teh wavelength at the peak
 
     # Closest intensity for each timepoint
