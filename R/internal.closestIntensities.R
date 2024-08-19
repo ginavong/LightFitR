@@ -18,7 +18,7 @@ internal.closestIntensities = function(irradiance_matrix, calibration_df, peaks=
     criteria = (calibration_df$led == LightFitR::helio.dyna.leds[a, 'wavelength']) & (round(calibration_df$wavelength) == round(peaks[a]))
     calibSubset = calibration_df[criteria,] #subset calibration_df data based on the led in question, and teh wavelength at the peak
 
-    # Closest intensity for each timepoint
+    ## Closest intensity for each timepoint
     closestIntensity = sapply(intendedSubset, function(i){
 
       if(i==0){closest=0}
@@ -34,5 +34,10 @@ internal.closestIntensities = function(irradiance_matrix, calibration_df, peaks=
   })
 
   closestIntensityMatrix = t(closestIntensityMatrix)
+
+  # Checks
+  if(sum(is.na(closestIntensityMatrix)) > 0){
+    warning("An internal function (internal.closestIntensities) has produced NAs. Please double check your input data")}
+
   return(closestIntensityMatrix)
 }
