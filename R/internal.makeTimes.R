@@ -14,7 +14,7 @@ internal.makeTimes = function(timeVector_POSICxt){
 
   timeVec = format(timeVector_POSICxt, '%H:%M:%S')
   timeMat = rbind(timeVec, hours, minutes, seconds) #Will this automatically numericise the times?
-  rownames(timeMat) = c('time_POSICxt', 'hour', 'minute', 'second')
+  rownames(timeMat) = c('time', 'hour', 'minute', 'second')
   colnames(timeMat) = as.character(timeVec)
 
   return(timeMat)

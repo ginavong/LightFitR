@@ -18,10 +18,20 @@ read.helio_json = function(helio_script){
     tempVec[-seq(4, 20, by=2)] #remove led names
   })
 
+  # Format time
+  timeMat = mat[1:3,]
+  timeVec = c(apply(timeMat, 2, function(t){ #For each column (i.e. timepoint)
+    timeString = paste(c(sprintf("%02d", t)), collapse=':') #Format string like HH:MM:SS by adding leading 0 where necessary (the sprintf bit)
+    timeString
+  }))
+
+  # Combine
+  mat = rbind(timeVec, mat)
+
   # Tidying
-  colnames(mat) = c(1:ncol(mat))
-  rownames(mat) = c('hour', 'minute', 'seconds', LightFitR::helio.dyna.leds[,'name'])
-  LightFitR::helio.checkFormat(mat[-c(1:3),], ncol(mat))
+  colnames(mat) = timeVec
+  rownames(mat) = c('time', 'hour', 'minute', 'second', LightFitR::helio.dyna.leds[,'name'])
+  LightFitR::helio.checkFormat(mat[-c(1:4),])
 
   return(mat)
 }
