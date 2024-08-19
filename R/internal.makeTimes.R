@@ -12,10 +12,10 @@ internal.makeTimes = function(timeVector_POSICxt){
   seconds = sapply(timeVector_POSICxt, lubridate::second)
 
 
-  timeVec = format(timeVector_POSICxt, '%H:%M:%S')
-  timeMat = rbind(timeVec, hours, minutes, seconds) #Will this automatically numericise the times?
+  timeVec = as.character(format(timeVector_POSICxt, '%H:%M:%S'))
+  timeMat = rbind(timeVec, hours, minutes, seconds)
   rownames(timeMat) = c('time', 'hour', 'minute', 'second')
-  colnames(timeMat) = as.character(timeVec)
+  colnames(timeMat) = timeVec
 
   return(timeMat)
 }
