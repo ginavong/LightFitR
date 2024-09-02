@@ -11,7 +11,7 @@ helio.checkFormat = function(check_matrix){ # Check that the regime matrix is fo
 
   # Check nEvents
   nEventsMessage = paste('Please check matrix formatting. ncol of matrix cannot exceed', helio.eventLimit, ', as the heliospectra cannot handle more. \n', sep=' ')
-  if(helio.eventLimit >= ncol(check_matrix)){
+  if(helio.eventLimit < ncol(check_matrix)){
     warning(nEventsMessage)
     nEvents = FALSE}
   else{nEvents = TRUE}
