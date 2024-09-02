@@ -6,7 +6,7 @@
 #' @export
 #'
 #' @examples
-helio.csvSchedule = function(regime_matrix, filename){
+helio.csv_schedule = function(regime_matrix, filename){
   LightFitR::helio.checkFormat(regime_matrix[-c(1:4),])
 
   # Header
