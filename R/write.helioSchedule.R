@@ -10,12 +10,12 @@
 #' @examples
 helio.writeSchedule = function(regime_matrix, filename, format=c('csv', 'json')){
   if(format=='csv'){
-    csv = helio.csv_schedule(regime_matrix, filename)
+    csv = LightFitR::helio.csv_schedule(regime_matrix, filename)
     write.table(csv, file=filename, row.names=F, col.names=F, sep=';', quote=F)
   }
 
   if(format=='json'){
-    json = helio.json_schedule(regime_matrix, filename)
+    json = LightFitR::helio.json_schedule(regime_matrix, filename)
     write.table(json, file=filename, row.names = F, col.names = F, quote = F)
   }
 }

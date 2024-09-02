@@ -12,7 +12,7 @@ nnls_intensities = function(irradiance_matrix, closest_intensities, calibration_
 
   # Setup
 
-  calib = internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
+  calib = LightFitR::internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
 
   ## Checks
   LightFitR::helio.checkFormat(irradiance_matrix)
