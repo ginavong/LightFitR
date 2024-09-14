@@ -18,8 +18,8 @@ nnls_intensities = function(irradiance_matrix, closest_intensities, calibration_
   LightFitR::helio.checkFormat(irradiance_matrix)
   LightFitR::helio.checkWhite(irradiance_matrix)
   LightFitR::internal.checkNAs(irradiance_matrix)
-  LightFitR::helio.checkFormat(closest_intensities)
-  LightFitR::helio.checkWhite(closest_intensities)
+  #LightFitR::helio.checkFormat(closest_intensities)
+  #LightFitR::helio.checkWhite(closest_intensities)
   LightFitR::internal.checkNAs(closest_intensities)
   LightFitR::checkRange(irradiance_matrix, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 
