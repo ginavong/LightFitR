@@ -29,6 +29,9 @@ makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, ca
   closestIntensities = LightFitR::internal.closestIntensities(irradiance_matrix, calibrationDf, peaks=peaks)
   intensities = LightFitR::nnls_intensities(irradiance_matrix, closestIntensities, calibrationDf$leds, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance, peaks=peaks)
 
+  ## Tidy up
+  intensities = LightFitR::internal.tidyIntensities(intensities, calibration_intensities)
+
   # Make regime
   regime = as.matrix(rbind(times, intensities))
   rownames(regime) = c(rownames(times), LightFitR::helio.dyna.leds$name)
