@@ -24,7 +24,7 @@ internal.closestIntensities = function(irradiance_matrix, calibration_df, peaks=
       if(i==0){closest=0}
       else{
         closestIrradiance = which.min(abs(calibSubset$irradiance - i))[1] #Which is the 1st closest to intended irradiance?
-        closest = calibSubset[closest, 'intensity'] #Get the corresponding intensity
+        closest = calibSubset[closestIrradiance, 'intensity'] #Get the corresponding intensity
       }
 
       closest
