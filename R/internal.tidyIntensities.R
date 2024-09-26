@@ -12,13 +12,16 @@ internal.tidyIntensities = function(intensities_matrix, calibration_intensities)
   # Round, since the lights only accept integers
   internalMat = round(intensities_matrix)
 
-  # Cap the intensities at 1000
+  # Cap the intensities at maximum intensity of calibration
   maxAllowable = max(calibration_intensities)
 
-  if(max(internalMat)> maxAllowable){
-    overAllowable = which(internalMat > maxAllowable)
-    internalMat[overAllowable] = maxAllowable
-  }
+  overAllowable = which(internalMat > maxAllowable)
+  internalMat[overAllowable] = maxAllowable
 
+  # Set negatives to 0
+  under0 = which(internalMat < 0)
+  internalMat[under0] = 0
+
+  # Return
   return(internalMat)
 }
