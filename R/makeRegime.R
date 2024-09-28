@@ -9,7 +9,7 @@
 #' @export
 #'
 #' @examples
-makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=helio.dyna.leds$wavelength){
+makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=helio.dyna.leds$wavelength, method='sle'){
 
   # Setup
   calibrationDf = LightFitR::internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
@@ -27,7 +27,19 @@ makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, ca
 
   # Calculate intensities
   closestIntensities = LightFitR::internal.closestIntensities(irradiance_matrix, calibrationDf, peaks=peaks)
-  intensities = LightFitR::nnls_intensities(irradiance_matrix, closestIntensities, calibrationDf$leds, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance, peaks=peaks)
+
+  switch(method,
+
+    'sle' = {intensities = LightFitR::sle_intensities(irradiance_matrix, closestIntensities, calibrationDf$leds, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance, peaks=peaks)},
+
+    'nnls' = {intensities = LightFitR::nnls_intensities(irradiance_matrix, closestIntensities, calibrationDf$leds, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance, peaks=peaks)},
+
+    stop("Input 'sle' or 'nnls' to method")
+  )
+
+
+  ## Tidy up
+  intensities = LightFitR::internal.tidyIntensities(intensities, calibration_intensities)
 
   # Make regime
   regime = as.matrix(rbind(times, intensities))
