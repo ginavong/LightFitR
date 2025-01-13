@@ -37,6 +37,10 @@ makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, ca
     stop("Input 'sle' or 'nnls' to method")
   )
 
+  # Formatting
+
+  ## Add 0 for white 5700k LED
+  intensities = rbind(intensities, rep(0, ncol(intensities)))
 
   ## Tidy up
   intensities = LightFitR::internal.tidyIntensities(intensities, calibration_intensities)
