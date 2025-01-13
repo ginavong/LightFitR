@@ -30,9 +30,9 @@ makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, ca
 
   switch(method,
 
-    'sle' = {intensities = LightFitR::sle_intensities(irradiance_matrix, closestIntensities, calibrationDf$leds, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance, peaks=peaks)},
+    'sle' = {intensities = LightFitR::sle_intensities(irradiance_matrix, closestIntensities, calibrationDf$led, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance, peaks=peaks)},
 
-    'nnls' = {intensities = LightFitR::nnls_intensities(irradiance_matrix, closestIntensities, calibrationDf$leds, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance, peaks=peaks)},
+    'nnls' = {intensities = LightFitR::nnls_intensities(irradiance_matrix, closestIntensities, calibrationDf$led, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance, peaks=peaks)},
 
     stop("Input 'sle' or 'nnls' to method")
   )
