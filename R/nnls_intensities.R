@@ -32,7 +32,7 @@ nnls_intensities = function(irradiance_matrix, closest_intensities, calibration_
 
     # Make a matrix of irradiances to input into nnls function
     mat = sapply(1:nrow(tempDf), function(j){
-      criteria = (calib$led == tempDf[j, 'led']) & (calib$intensity == tempDf[j, 'closest']) & (calib$wavelength %in% peaks) # We want the irradiances (from calib data) of each LED at the intensity where it is closest to the intended irradiance
+      criteria = (calib$led == tempDf[j, 'led']) & (calib$intensity == tempDf[j, 'closest']) & (calib$wavelength %in% peaks[-9]) # We want the irradiances (from calib data) of each LED at the intensity where it is closest to the intended irradiance
       calib[criteria, 'irradiance']
     })
 
