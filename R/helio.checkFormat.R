@@ -16,7 +16,7 @@ helio.checkFormat = function(check_matrix){ # Check that the regime matrix is fo
     nEvents = FALSE}
   else{nEvents = TRUE}
 
-  # Check ntumber of LEDs
+  # Check number of LEDs
   ledMessage = paste('Please check that your rows correspond with all ', nrow(helio.dyna.leds), ' LEDs in the heliospectra DYNA: ', paste(helio.dyna.leds$name, collapse=', '), sep='')
   if(nrow(check_matrix) != nrow(helio.dyna.leds)){
     warning(ledMessage)
