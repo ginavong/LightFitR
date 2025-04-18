@@ -4,12 +4,13 @@
 #' @inheritParams internal.makeTimes
 #' @inheritParams internal.closestIntensities
 #' @interitParams nnls_intensities
+#' @param method Use 'nnls' (non-negative least squares) or 'sle' (system of linear equations)
 #'
 #' @return Matrix with light regime needed to program the lights
 #' @export
 #'
 #' @examples
-makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=helio.dyna.leds$wavelength){
+makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=helio.dyna.leds$wavelength, method='nnls'){
 
   # Setup
   calibrationDf = LightFitR::internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
@@ -27,7 +28,23 @@ makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, ca
 
   # Calculate intensities
   closestIntensities = LightFitR::internal.closestIntensities(irradiance_matrix, calibrationDf, peaks=peaks)
-  intensities = LightFitR::nnls_intensities(irradiance_matrix, closestIntensities, calibrationDf$leds, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance, peaks=peaks)
+
+  switch(method,
+
+    'sle' = {intensities = LightFitR::sle_intensities(irradiance_matrix, closestIntensities, calibrationDf$led, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance, peaks=peaks)},
+
+    'nnls' = {intensities = LightFitR::nnls_intensities(irradiance_matrix, closestIntensities, calibrationDf$led, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance, peaks=peaks)},
+
+    stop("Input 'sle' or 'nnls' to method")
+  )
+
+  # Formatting
+
+  ## Add 0 for white 5700k LED
+  intensities = rbind(intensities, rep(0, ncol(intensities)))
+
+  ## Tidy up
+  intensities = LightFitR::internal.tidyIntensities(intensities, calibration_intensities)
 
   # Make regime
   regime = as.matrix(rbind(times, intensities))
