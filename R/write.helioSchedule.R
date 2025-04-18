@@ -4,6 +4,8 @@
 #' @param filename Character. Filename to export to
 #' @param format Character. Which format to export to? csv or json. Use extensions '.csv' or '.txt'
 #'
+#' @importFrom utils write.table
+#'
 #' @return
 #' @export File (format specified by user) that is readable by Heliospectra Lights
 #'
@@ -11,11 +13,11 @@
 helio.writeSchedule = function(regime_matrix, filename, format=c('csv', 'json')){
   if(format=='csv'){
     csv = LightFitR::helio.csv_schedule(regime_matrix, filename)
-    write.table(csv, file=filename, row.names=F, col.names=F, sep=';', quote=F)
+    utils::write.table(csv, file=filename, row.names=F, col.names=F, sep=';', quote=F)
   }
 
   if(format=='json'){
     json = LightFitR::helio.json_schedule(regime_matrix, filename)
-    write.table(json, file=filename, row.names = F, col.names = F, quote = F)
+    utils::write.table(json, file=filename, row.names = F, col.names = F, quote = F)
   }
 }

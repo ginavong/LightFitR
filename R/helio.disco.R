@@ -2,12 +2,14 @@
 #'
 #' @inheritParams helio.writeSchedule
 #'
+#' @import lubridate
+#'
 #' @return
 #' @export Heliospectra file with random disco
 #'
 #' @examples
 helio.disco = function(filename, format=c('csv', 'json')){
-  nEvents = helio.eventLimit
+  nEvents = LightFitR::helio.eventLimit
 
   #make random matrix of light intensities as regime
   random = sapply(1:nEvents, function(i){
@@ -26,7 +28,7 @@ helio.disco = function(filename, format=c('csv', 'json')){
 
   # Make regime
   regime = as.matrix(rbind(time_mat, refinedRandom, c(rep(0, nEvents)))) #make white light = 0 the whole time
-  rownames(regime) = c('time', 'hours', 'minutes', 'seconds', helio.dyna.leds[,'name'])
+  rownames(regime) = c('time', 'hours', 'minutes', 'seconds', LightFitR::helio.dyna.leds[,'name'])
   #image(regime) #sanity check that things are random
 
   rm(random, refinedRandom, time_vec)

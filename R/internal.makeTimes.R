@@ -2,6 +2,8 @@
 #'
 #' @param timeVector_POSICxt Vector of schedule timepoints in POSICxt format
 #'
+#' @import lubridate
+#'
 #' @return Matrix of times. Each row corresponds to hours, minutes, seconds
 #' @export
 #'

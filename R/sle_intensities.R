@@ -4,11 +4,13 @@
 #' @inheritParams internal.closestIntensities
 #' @inheritParams nnls_intensities
 #'
+#' @importFrom graphics image
+#'
 #' @return
 #' @export
 #'
 #' @examples
-sle_intensities = function(irradiance_matrix, closest_intensities, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=helio.dyna.leds$wavelength){
+sle_intensities = function(irradiance_matrix, closest_intensities, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=LightFitR::helio.dyna.leds$wavelength){
 
   # Setup
 
@@ -51,7 +53,7 @@ sle_intensities = function(irradiance_matrix, closest_intensities, calibration_l
   # Add white LED back
   intensities_mat = LightFitR::internal.addWhiteZero(intensities_mat)
 
-  image(intensities_mat, main='predicted intensities')
+  graphics::image(intensities_mat, main='predicted intensities')
 
   return(intensities_mat)
 }

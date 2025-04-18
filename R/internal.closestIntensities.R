@@ -15,7 +15,7 @@ internal.closestIntensities = function(irradiance_matrix, calibration_df, peaks=
   irradMat = LightFitR::internal.rmWhite(irradiance_matrix)
 
   # Calculate closest
-  closestIntensityMatrix = sapply(1:(nrow(helio.dyna.leds)-1), function(a){ # Go through each LED and calculate the closest we can get with calibration data
+  closestIntensityMatrix = sapply(1:(nrow(LightFitR::helio.dyna.leds)-1), function(a){ # Go through each LED and calculate the closest we can get with calibration data
     intendedSubset = c(as.numeric(irradMat[a,]))
 
     criteria = (calibration_df$led == LightFitR::helio.dyna.leds[a, 'wavelength']) & (round(calibration_df$wavelength) == round(peaks[a]))

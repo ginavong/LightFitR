@@ -2,6 +2,8 @@
 #'
 #' @param helio_script File (.txt or .json) containing heliospectra regime script
 #'
+#' @importFrom utils read.delim
+#'
 #' @return Matrix containing the regime encoded by the Heliospectra script
 #' @export
 #'
@@ -9,7 +11,7 @@
 read.helio_json = function(helio_script){
 
   # Read in & initial formatting
-  regime = read.delim(helio_script, skip = 17) #Skip first 17 lines, which is metadata
+  regime = utils::read.delim(helio_script, skip = 17) #Skip first 17 lines, which is metadata
   regime = regime[-nrow(regime),] # Remove closing brackets, coerce into vector of chars
 
   # Format regime into matrix

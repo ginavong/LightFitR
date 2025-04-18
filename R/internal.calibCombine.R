@@ -5,6 +5,8 @@
 #' @param calibration_intensities A numeric vector of intensities (heliospectra units) from calibration
 #' @param calibration_irradiances A numeric vector of measured irradiances (any units, as long as it is consistently used) from calibration
 #'
+#' @import stringr
+#'
 #' @return Correctly formatted dataframe of calibration data, for use in other functions
 #' @export
 #'
