@@ -14,6 +14,8 @@ Includes:
 Depends: 
     R (>= 2.10)
 Imports: 
+    utils,
+    graphics,
     lubridate,
     nnls,
     stringr
