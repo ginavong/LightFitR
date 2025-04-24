@@ -1,4 +1,9 @@
-#' Write a disco schedule for fun!
+#' Turn Heliospectra into disco lights
+#'
+#' Congratulations! You've found the easter egg function!
+#'
+#' This writes a schedule for Heliospectra DYNA lights which randomly changes colour every second for a fun disco effect. The disco will last until the Heliospectra runs out of memory (150 events), so you can get 2 min 30s of disco out of your expensive lights...
+#' Enjoy!
 #'
 #' @inheritParams helio.writeSchedule
 #'
@@ -8,6 +13,9 @@
 #' @export Heliospectra file with random disco
 #'
 #' @examples
+#' tempfile_name = tempfile(fileext='.txt')
+#' helio.disco(tempfile_name, format='json')
+#'
 helio.disco = function(filename, format=c('csv', 'json')){
   nEvents = LightFitR::helio.eventLimit
 
