@@ -44,7 +44,6 @@
 #' Matrix of random target irradiances for example purposes
 #'
 #' @format A matrix with 9 rows and 10 columns: each row represents an LED channel and each column represents an event
-#'}
 #'
 "target_irradiance"
 
@@ -62,6 +61,15 @@
 #' Example timepoints for events
 #'
 #' @format A vector of length 10 with timepoints in POSIXct format
-#'}
 #'
 "time_vector"
+
+#' example json schedule
+#'
+#' Example Heliospectra schedule in json format.This schedule was run to calibrate the lights.
+#'
+#' @format A .txt file with a Heliospectra schedule in the json format.
+#'
+#' @source https://github.com/ginavong/2024_LightFitR_MethodsPaper/blob/master/data/regimes/calibration/calibration.txt
+#'
+"example_json_schedule.txt"
