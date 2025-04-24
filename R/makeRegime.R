@@ -1,19 +1,35 @@
 #' Create a regime (matrix) to program lights to achieve intended irradiances
 #'
+#' @description
+#' This wrapper function carries out multiple steps:
+#'
+#' \ennumerate{
+#'  \item Calculate closest intensities
+#'  \item Predict the intensities to use to achieve the target irradiance (via a system of linear equations or non-negative least squares)
+#'  \item Tidy the intensities (rounding to integer, keep within the range of intensities that the lights can be set to)
+#'  \item Format the intensities and timestamps into a human-readable regime matrix
+#' }
+#'
+#' @section NNLS vs SLE:
+#'
+#' NNLS and SLE largely predict the same intensities, except in outlier cases. The default is NNLS, but if your predicted intensities end up being very far off, try SLE.
+#'
+#'
 #' @inheritParams internal.calibCombine
 #' @inheritParams internal.makeTimes
 #' @inheritParams internal.closestIntensities
-#' @interitParams nnls_intensities
+#' @inheritParams nnls_intensities
 #' @param method Use 'nnls' (non-negative least squares) or 'sle' (system of linear equations)
 #'
 #' @return Matrix with light regime needed to program the lights
-#' @export
 #'
 #' @examples
+#' # Prep variables
 #' calib <- LightFitR::calibration
 #' times <- LightFitR::time_vector
 #' target_irradiance <- LightFitR::target_irradiance
 #'
+#' # Run function
 #' makeRegime(times, target_irradiance, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 #'
 #'

@@ -8,9 +8,16 @@
 #' @import nnls
 #'
 #' @return Matrix of intensities to set the lights to, to achieve desired irradiances
-#' @export
 #'
 #' @examples
+#' # Prep variables
+#' target_irradiance = LightFitR::target_irradiance
+#' closest = LightFitR::example_closest
+#' calib = LightFitR::calibration
+#'
+#' # Run the function
+#' nnls_intensities(target_irradiance, closest,  calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+#'
 nnls_intensities = function(irradiance_matrix, closest_intensities, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=helio.dyna.leds$wavelength){
 
   # Setup
