@@ -47,12 +47,19 @@
 #'
 "target_irradiance"
 
+#' closest intensities
+#'
+#' Matrix of closest intensities for example purposes. Generated from `target_irradiance`
+#'
+#' @format A matrix with 9 rows and 10 columns: each row represents an LED channel and each column represents an event
+#'
+"example_closest"
+
 #' example intensities
 #'
 #' Matrix of random intensities for example purposes
 #'
 #' @format A matrix with 9 rows and 10 columns: each row represents an LED channel and each column represents an event
-#'}
 #'
 'example_intensities'
 
