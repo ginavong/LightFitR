@@ -56,3 +56,12 @@
 #'}
 #'
 'example_intensities'
+
+#' time vector
+#'
+#' Example timepoints for events
+#'
+#' @format A vector of length 10 with timepoints in POSIXct format
+#'}
+#'
+"time_vector"
