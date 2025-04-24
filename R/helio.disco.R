@@ -9,7 +9,6 @@
 #'
 #' @import lubridate
 #'
-#' @return
 #' @export Heliospectra file with random disco
 #'
 #' @examples
