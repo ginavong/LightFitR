@@ -5,9 +5,11 @@
 #' @import lubridate
 #'
 #' @return Matrix of times. Each row corresponds to hours, minutes, seconds
-#' @export
 #'
 #' @examples
+#' print(LightFitR::time_vector)
+#' internal.makeTimes(LightFitR::time_vector)
+#'
 internal.makeTimes = function(timeVector_POSICxt){
   hours = sapply(timeVector_POSICxt, lubridate::hour)
   minutes = sapply(timeVector_POSICxt, lubridate::minute)

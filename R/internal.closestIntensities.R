@@ -6,9 +6,16 @@
 #' @param peaks Vector of length 8 or 9. Containing wavelengths at which each LED peaks.
 #'
 #' @return Matrix of closest intensities, in the same format as `irradiance_matrix`
-#' @export
 #'
 #' @examples
+#'
+#' # Format calibration data correctly
+#' calib <- LightFitR::calibration
+#' calib <- internal.calibCombine(calib$LED, calib$wavelength, calib$intensity, calib$irradiance)
+#'
+#' # Run function
+#' internal.closestIntensities(LightFitR::target_irradiance, calib)
+#'
 internal.closestIntensities = function(irradiance_matrix, calibration_df, peaks=helio.dyna.leds$wavelength){
 
   # Setup
