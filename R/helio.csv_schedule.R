@@ -3,9 +3,11 @@
 #' @inheritParams write.helioSchedule
 #'
 #' @return Matrix formatted for Heliospectra lights csv
-#' @export
 #'
 #' @examples
+#' tempfile_name = tempfile(fileext='.csv')
+#' helio.csv_schedule(LightFitR::example_regime, tempfile_name)
+#'
 
 helio.csv_schedule = function(regime_matrix, filename){
   LightFitR::helio.checkFormat(regime_matrix[-c(1:4),])

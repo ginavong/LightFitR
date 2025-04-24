@@ -3,9 +3,11 @@
 #' @inheritParams write.helioSchedule
 #'
 #' @return Character in json format that Heliospectra can parse
-#' @export
 #'
 #' @examples
+#' tempfile_name = tempfile(fileext='.txt')
+#' helio.csv_schedule(LightFitR::example_regime, tempfile_name)
+#'
 helio.json_schedule = function(regime_matrix, filename){
   LightFitR::helio.checkFormat(regime_matrix[-c(1:4),])
 
