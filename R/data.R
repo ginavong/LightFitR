@@ -38,3 +38,12 @@
 #'@source <https://github.com/ginavong/2024_LightFitR_MethodsPaper/blob/master/data/heliospectra_measurements/calibration/Apollo_Calib_20240827/Apollo_calibration_annotated_20240827.Rda>
 #'
 "calibration"
+
+#' target irradiances
+#'
+#' Matrix of random target irradiances for example purposes
+#'
+#' @format A matrix with 9 rows and 10 columns: each row represents an LED channel and each column represents an event
+#'}
+#'
+"target_irradiance"
