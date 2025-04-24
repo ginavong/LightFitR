@@ -64,6 +64,23 @@
 #'
 "time_vector"
 
+#' regime matrix
+#'
+#' Example regime matrix
+#'
+#' @format A matrix with 13 rows and 10 columns:
+#' \describe{
+#'  \item{time}{time in HH:MM:SS format}
+#'  \item{hour}{The hour of the event}
+#'  \item{minute}{The minute of the event}
+#'  \item{second}{The second of the event}
+#'  \item{380nm}{Intensity at 380nm LED channel}
+#'  \item{400nm}{Intensity at 400nm LED channel}
+#'  \item{etc.}
+#' }
+#'
+"example_regime"
+
 #' example json schedule
 #'
 #' Example Heliospectra schedule in json format.This schedule was run to calibrate the lights.
