@@ -20,3 +20,21 @@
 #'@source <https://heliospectra.com/led-grow-lights/dyna/>
 #'
 "helio.dyna.leds"
+
+#' calibration data
+#'
+#' Example calibration data
+#'
+#' @format A data frame with 12 columns:
+#' \describe{
+#'  \item{filename}{File that the raw data came from}
+#'  \item{time}{The time when a given measurement was taken}
+#'  \item{LED}{LED channel being calibrated at that timepoint}
+#'  \item{intensity}{Intensity the light is set to}
+#'  \item{wavelength}{The wavelength this row describes}
+#'  \item{irradiance}{The irradiance measured at that wavelength by the spectrometer}
+#'}
+#'
+#'@source <https://github.com/ginavong/2024_LightFitR_MethodsPaper/blob/master/data/heliospectra_measurements/calibration/Apollo_Calib_20240827/Apollo_calibration_annotated_20240827.Rda>
+#'
+"calibration"
