@@ -8,7 +8,7 @@
 #' @examples
 #' calib <- LightFitR::calibration
 #' irradiances <- LightFitR::target_irradiance
-#' checkRange(irradiances, calib$LED, calib$wavelength, calib$intensity, calib$irradiance)
+#' checkRange(irradiances, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 #'
 checkRange = function(intended_irradiance, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances){
 

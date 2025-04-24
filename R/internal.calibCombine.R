@@ -11,7 +11,7 @@
 #'
 #' @examples
 #' calib <- LightFitR::calibration
-#' internal.calibCombine(calib$LED, calib$wavelength, calib$intensity, calib$irradiance)
+#' internal.calibCombine(calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 #'
 internal.calibCombine = function(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances){
 

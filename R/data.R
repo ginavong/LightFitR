@@ -29,7 +29,7 @@
 #' \describe{
 #'  \item{filename}{File that the raw data came from}
 #'  \item{time}{The time when a given measurement was taken}
-#'  \item{LED}{LED channel being calibrated at that timepoint}
+#'  \item{led}{LED channel being calibrated at that timepoint}
 #'  \item{intensity}{Intensity the light is set to}
 #'  \item{wavelength}{The wavelength this row describes}
 #'  \item{irradiance}{The irradiance measured at that wavelength by the spectrometer}

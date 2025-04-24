@@ -10,6 +10,13 @@
 #' @export
 #'
 #' @examples
+#' calib <- LightFitR::calibration
+#' times <- LightFitR::time_vector
+#' target_irradiance <- LightFitR::target_irradiance
+#'
+#' makeRegime(times, target_irradiance, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+#'
+#'
 makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=LightFitR::helio.dyna.leds$wavelength, method='nnls'){
 
   # Setup

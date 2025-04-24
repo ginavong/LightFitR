@@ -17,6 +17,9 @@ calibration = calibration[calibration$LED!=5700,]
 keepCols = c(1, 4, 7:9, 11)
 calibration = calibration[, keepCols]
 
+## Colnames
+colnames(calibration)[3] = 'led'
+
 
 # Export
 
