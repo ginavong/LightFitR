@@ -10,9 +10,6 @@ calibration = df
 
 calibration = calibration[calibration$middle_time==TRUE,]
 
-## Remove 5700k (white) LED
-calibration = calibration[calibration$LED!=5700,]
-
 ## Remove unnecessary columns
 keepCols = c(1, 4, 7:9, 11)
 calibration = calibration[, keepCols]
