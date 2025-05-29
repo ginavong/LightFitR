@@ -5,7 +5,7 @@ Version: 0.1.0
 Authors@R: person('Gina', 'Vong', email='gywv500@york.ac.uk', role=c('aut', 'cre'))
 Maintainer: The package maintainer <gywv500@york.ac.uk>
 Description: A system for accurately designing complex light regimes for plant biology experiments.
-License: MIT
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Includes: 
