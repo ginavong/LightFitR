@@ -3,9 +3,11 @@
 #' @inheritParams write.helioSchedule
 #'
 #' @return Character in json format that Heliospectra can parse
-#' @export
 #'
 #' @examples
+#' tempfile_name = tempfile(fileext='.txt')
+#' helio.csv_schedule(LightFitR::example_regime, tempfile_name)
+#'
 helio.json_schedule = function(regime_matrix, filename){
   LightFitR::helio.checkFormat(regime_matrix[-c(1:4),])
 
@@ -14,8 +16,8 @@ helio.json_schedule = function(regime_matrix, filename){
     paste('{\"hour\" : ', event_vector[2], ', \"minute\" : ', event_vector[3], ', \"second\" : ', event_vector[4], sep='')
   }
   lightRecipe = function(event_vector){ #Input: light intensity vector without time consideration - not sure if good idea - think light will sort that as long as rownames are sensible
-    paste(sapply(1:nrow(helio.dyna.leds), function(i){
-      paste('{\"wl\":', helio.dyna.leds[i, 'wavelength'], ',\"i\":', event_vector[4+i], "}", sep="")
+    paste(sapply(1:nrow(LightFitR::helio.dyna.leds), function(i){
+      paste('{\"wl\":', LightFitR::helio.dyna.leds[i, 'wavelength'], ',\"i\":', event_vector[4+i], "}", sep="")
     }), sep="", collapse = ",")
   }
 

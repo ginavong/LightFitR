@@ -1,13 +1,22 @@
-#' Write a disco schedule for fun!
+#' Turn Heliospectra into disco lights
+#'
+#' Congratulations! You've found the easter egg function!
+#'
+#' This writes a schedule for Heliospectra DYNA lights which randomly changes colour every second for a fun disco effect. The disco will last until the Heliospectra runs out of memory (150 events), so you can get 2 min 30s of disco out of your expensive lights...
+#' Enjoy!
 #'
 #' @inheritParams helio.writeSchedule
 #'
-#' @return
+#' @import lubridate
+#'
 #' @export Heliospectra file with random disco
 #'
 #' @examples
+#' tempfile_name = tempfile(fileext='.txt')
+#' helio.disco(tempfile_name, format='json')
+#'
 helio.disco = function(filename, format=c('csv', 'json')){
-  nEvents = helio.eventLimit
+  nEvents = LightFitR::helio.eventLimit
 
   #make random matrix of light intensities as regime
   random = sapply(1:nEvents, function(i){
@@ -26,7 +35,7 @@ helio.disco = function(filename, format=c('csv', 'json')){
 
   # Make regime
   regime = as.matrix(rbind(time_mat, refinedRandom, c(rep(0, nEvents)))) #make white light = 0 the whole time
-  rownames(regime) = c('time', 'hours', 'minutes', 'seconds', helio.dyna.leds[,'name'])
+  rownames(regime) = c('time', 'hours', 'minutes', 'seconds', LightFitR::helio.dyna.leds[,'name'])
   #image(regime) #sanity check that things are random
 
   rm(random, refinedRandom, time_vec)

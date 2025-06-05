@@ -6,6 +6,8 @@
 #' @export
 #'
 #' @examples
+#' internal.checkNAs(LightFitR::example_intensities)
+#'
 internal.checkNAs = function(check_matrix){
 
   naMessage = 'Your matrix contains NAs. The heliospectra cannot accept NAs as input \n' #May need to reword

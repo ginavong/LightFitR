@@ -4,11 +4,20 @@
 #' @inheritParams internal.closestIntensities
 #' @inheritParams nnls_intensities
 #'
-#' @return
-#' @export
+#' @importFrom graphics image
+#'
+#' @return Matrix of intensities to set the lights to, to achieve desired irradiances
 #'
 #' @examples
-sle_intensities = function(irradiance_matrix, closest_intensities, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=helio.dyna.leds$wavelength){
+#' #' # Prep variables
+#' target_irradiance = LightFitR::target_irradiance
+#' closest = LightFitR::example_closest
+#' calib = LightFitR::calibration
+#'
+#' # Run the function
+#' sle_intensities(target_irradiance, closest,  calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+#'
+sle_intensities = function(irradiance_matrix, closest_intensities, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=LightFitR::helio.dyna.leds$wavelength){
 
   # Setup
 
@@ -18,21 +27,25 @@ sle_intensities = function(irradiance_matrix, closest_intensities, calibration_l
   LightFitR::helio.checkFormat(irradiance_matrix)
   LightFitR::helio.checkWhite(irradiance_matrix)
   LightFitR::internal.checkNAs(irradiance_matrix)
-  #LightFitR::helio.checkFormat(closest_intensities)
-  #LightFitR::helio.checkWhite(closest_intensities)
+  LightFitR::helio.checkFormat(closest_intensities)
+  LightFitR::helio.checkWhite(closest_intensities)
   LightFitR::internal.checkNAs(closest_intensities)
   LightFitR::checkRange(irradiance_matrix, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 
+  ## Remove white LED
+  irradMat = LightFitR::internal.rmWhite(irradiance_matrix)
+  closestMat = LightFitR::internal.rmWhite(closest_intensities)
+
   # LM
 
-  intensities_mat = sapply(1:ncol(closest_intensities), function(i){
+  intensities_mat = sapply(1:ncol(closestMat), function(i){
 
     # Make a dataframe with only the info we need for this event
-    tempDf = data.frame(led=LightFitR::helio.dyna.leds[-9, 'wavelength'], closest=closest_intensities[,i], intended=irradiance_matrix[-9,i])
+    tempDf = data.frame(led=LightFitR::helio.dyna.leds[-9, 'wavelength'], closest=closestMat[,i], intended=irradMat[,i])
 
     # Make a matrix of irradiances to input into nnls function
     mat = sapply(1:nrow(tempDf), function(j){
-      criteria = (calib$led == tempDf[j, 'led']) & (calib$intensity == tempDf[j, 'closest']) & (calib$wavelength %in% peaks) # We want the irradiances (from calib data) of each LED at the intensity where it is closest to the intended irradiance
+      criteria = (calib$led == tempDf[j, 'led']) & (calib$intensity == tempDf[j, 'closest']) & (calib$wavelength %in% peaks[-9]) # We want the irradiances (from calib data) of each LED at the intensity where it is closest to the intended irradiance
       calib[criteria, 'irradiance']
     })
 
@@ -44,7 +57,10 @@ sle_intensities = function(irradiance_matrix, closest_intensities, calibration_l
 
   })
 
-  image(intensities_mat, main='predicted intensities')
+  # Add white LED back
+  intensities_mat = LightFitR::internal.addWhiteZero(intensities_mat)
+
+  graphics::image(intensities_mat, main='predicted intensities')
 
   return(intensities_mat)
 }

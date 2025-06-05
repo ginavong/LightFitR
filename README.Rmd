@@ -22,7 +22,7 @@ The goal of LightFitR is to allow scientists to program complex light regimes wi
 
 ## Installation
 
-You can install the development version of LightFitR from [GitHub](https://github.com/) with:
+You can install the development version of LightFitR from [GitHub](https://github.com/ginavong/LightFitR) with:
 
 ``` r
 # install.packages("devtools")
@@ -35,14 +35,18 @@ This is a basic example which shows you how to solve a common problem:
 
 ```{r example}
 library(LightFitR)
-## basic example code
+
+# Prep variables
+calib <- LightFitR::calibration
+times <- LightFitR::time_vector
+target_irradiance <- LightFitR::target_irradiance
+
+# Run function
+#makeRegime(times, target_irradiance, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 ```
 
-What is special about using `README.Rmd` instead of just `README.md`? You can include R chunks like so:
 
-```{r cars}
-summary(cars)
-```
+# Devnotes
 
 You'll still need to render `README.Rmd` regularly, to keep `README.md` up-to-date. `devtools::build_readme()` is handy for this.
 

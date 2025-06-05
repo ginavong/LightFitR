@@ -6,14 +6,24 @@
 #' @param peaks Vector of length 8 or 9. Containing wavelengths at which each LED peaks.
 #'
 #' @return Matrix of closest intensities, in the same format as `irradiance_matrix`
-#' @export
 #'
 #' @examples
+#'
+#' # Format calibration data correctly
+#' calib <- LightFitR::calibration
+#' calib <- internal.calibCombine(calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+#'
+#' # Run function
+#' internal.closestIntensities(LightFitR::target_irradiance, calib)
+#'
 internal.closestIntensities = function(irradiance_matrix, calibration_df, peaks=helio.dyna.leds$wavelength){
 
+  # Setup
+  irradMat = LightFitR::internal.rmWhite(irradiance_matrix)
+
   # Calculate closest
-  closestIntensityMatrix = sapply(1:(nrow(helio.dyna.leds)-1), function(a){ # Go through each LED and calculate the closest we can get with calibration data
-    intendedSubset = c(as.numeric(irradiance_matrix[a,]))
+  closestIntensityMatrix = sapply(1:(nrow(LightFitR::helio.dyna.leds)-1), function(a){ # Go through each LED and calculate the closest we can get with calibration data
+    intendedSubset = c(as.numeric(irradMat[a,]))
 
     criteria = (calibration_df$led == LightFitR::helio.dyna.leds[a, 'wavelength']) & (round(calibration_df$wavelength) == round(peaks[a]))
     calibSubset = calibration_df[criteria,] #subset calibration_df data based on the led in question, and teh wavelength at the peak
@@ -35,7 +45,11 @@ internal.closestIntensities = function(irradiance_matrix, calibration_df, peaks=
     closestIntensity
   })
 
+
+  # Formatting
+
   closestIntensityMatrix = t(closestIntensityMatrix)
+  closestIntensityMatrix = LightFitR::internal.addWhiteZero(closestIntensityMatrix)
 
   # Checks
   if(sum(is.na(closestIntensityMatrix)) > 0){

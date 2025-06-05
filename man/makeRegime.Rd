@@ -11,7 +11,8 @@ makeRegime(
   calibration_wavelengths,
   calibration_intensities,
   calibration_irradiances,
-  peaks = helio.dyna.leds$wavelength
+  peaks = helio.dyna.leds$wavelength,
+  method = "nnls"
 )
 }
 \arguments{
@@ -26,6 +27,8 @@ makeRegime(
 \item{calibration_irradiances}{A numeric vector of measured irradiances (any units, as long as it is consistently used) from calibration}
 
 \item{peaks}{Vector of length 8 or 9. Containing wavelengths at which each LED peaks.}
+
+\item{method}{Use 'nnls' (non-negative least squares) or 'sle' (system of linear equations)}
 }
 \value{
 Matrix with light regime needed to program the lights

@@ -5,7 +5,7 @@ Version: 0.1.0
 Authors@R: person('Gina', 'Vong', email='gywv500@york.ac.uk', role=c('aut', 'cre'))
 Maintainer: The package maintainer <gywv500@york.ac.uk>
 Description: A system for accurately designing complex light regimes for plant biology experiments.
-License: MIT
+License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Includes: 
@@ -14,7 +14,12 @@ Includes:
 Depends: 
     R (>= 2.10)
 Imports: 
+    utils,
+    graphics,
     lubridate,
     nnls,
     stringr
 RoxygenNote: 7.3.2
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
