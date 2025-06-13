@@ -21,7 +21,7 @@ internal.closestWavelength = function(wavelength_vec, peak_wavelengths){
 
     wavelengths = unique(wavelength_vec)
 
-    closestWavelengths = sapply(peak_wavelengths, function(p){
+    closestWavelengths = sapply(peak_wavelengths[-9], function(p){
       loc = which.min(abs(wavelengths - p))
       wavelengths[loc]
     })
