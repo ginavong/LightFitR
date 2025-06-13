@@ -42,7 +42,7 @@ times <- LightFitR::time_vector
 target_irradiance <- LightFitR::target_irradiance
 
 # Run function
-#makeRegime(times, target_irradiance, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+makeRegime(times, target_irradiance, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 ```
 
 
