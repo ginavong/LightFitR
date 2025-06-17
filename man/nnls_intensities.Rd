@@ -11,7 +11,7 @@ nnls_intensities(
   calibration_wavelengths,
   calibration_intensities,
   calibration_irradiances,
-  peaks = helio.dyna.leds$wavelength
+  peaks = LightFitR::helio.dyna.leds$wavelength
 )
 }
 \arguments{

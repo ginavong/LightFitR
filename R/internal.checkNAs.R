@@ -3,7 +3,6 @@
 #' @inheritParams helio.checkFormat
 #'
 #' @return Boolean: TRUE = pass, FALSE = fail
-#' @export
 #'
 #' @examples
 #' internal.checkNAs(LightFitR::example_intensities)

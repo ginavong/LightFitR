@@ -5,7 +5,6 @@
 #' @param check_matrix Matrix to be checked. Rows correspond to LEDs and columns are events / timepoints.
 #'
 #' @return Vector of booleans: TRUE = pass, FALSE = fail
-#' @export
 #'
 #' @examples
 #' matrix_to_check <- LightFitR::target_irradiance
