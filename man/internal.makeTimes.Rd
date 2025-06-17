@@ -20,3 +20,4 @@ print(LightFitR::time_vector)
 internal.makeTimes(LightFitR::time_vector)
 
 }
+\keyword{internal}

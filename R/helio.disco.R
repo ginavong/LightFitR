@@ -31,7 +31,7 @@ helio.disco = function(filename, format=c('csv', 'json')){
   # Get times
   time_vec = seq(from=lubridate::hms('00:00:00'), by=lubridate::seconds(1), length.out=nEvents)
   time_vec = as.POSIXct(time_vec, origin=lubridate::origin, tz='GMT')
-  time_mat = LightFitR::internal.makeTimes(time_vec)
+  time_mat = internal.makeTimes(time_vec)
 
   # Make regime
   regime = as.matrix(rbind(time_mat, refinedRandom, c(rep(0, nEvents)))) #make white light = 0 the whole time

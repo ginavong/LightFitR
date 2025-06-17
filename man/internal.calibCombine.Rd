@@ -31,3 +31,4 @@ calib <- LightFitR::calibration
 internal.calibCombine(calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 
 }
+\keyword{internal}

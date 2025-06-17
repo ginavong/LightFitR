@@ -6,6 +6,7 @@
 #' @param peaks Vector of length 8 or 9. Containing wavelengths at which each LED peaks.
 #'
 #' @return Matrix of closest intensities, in the same format as `irradiance_matrix`
+#' @keywords internal
 #'
 #' @examples
 #'
@@ -19,8 +20,8 @@
 internal.closestIntensities = function(irradiance_matrix, calibration_df, peaks=LightFitR::helio.dyna.leds$wavelength){
 
   # Setup
-  irradMat = LightFitR::internal.rmWhite(irradiance_matrix)
-  peakWavelengths = LightFitR::internal.closestWavelength(unique(calibration_df$wavelength), peaks)
+  irradMat = internal.rmWhite(irradiance_matrix)
+  peakWavelengths = internal.closestWavelength(unique(calibration_df$wavelength), peaks)
 
   # Calculate closest
   closestIntensityMatrix = sapply(1:(nrow(LightFitR::helio.dyna.leds)-1), function(a){ # Go through each LED and calculate the closest we can get with calibration data
@@ -50,7 +51,7 @@ internal.closestIntensities = function(irradiance_matrix, calibration_df, peaks=
   # Formatting
 
   closestIntensityMatrix = t(closestIntensityMatrix)
-  closestIntensityMatrix = LightFitR::internal.addWhiteZero(closestIntensityMatrix)
+  closestIntensityMatrix = internal.addWhiteZero(closestIntensityMatrix)
 
   # Checks
   if(sum(is.na(closestIntensityMatrix)) > 0){

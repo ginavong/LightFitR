@@ -8,6 +8,7 @@
 #' @import stringr
 #'
 #' @return Correctly formatted dataframe of calibration data, for use in other functions
+#' @keywords internal
 #'
 #' @examples
 #' calib <- LightFitR::calibration

@@ -5,6 +5,7 @@
 #' @import lubridate
 #'
 #' @return Matrix of times. Each row corresponds to hours, minutes, seconds
+#' @keywords internal
 #'
 #' @examples
 #' print(LightFitR::time_vector)

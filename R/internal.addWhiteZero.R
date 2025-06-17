@@ -3,7 +3,7 @@
 #' @param intensities_matrix Matrix of intensities with 8 rows
 #'
 #' @returns Matrix of intensities with 9 rows
-#' @noRd
+#' @keywords internal
 #'
 #' @examples
 #' intensities <- LightFitR::example_intensities[-9,]

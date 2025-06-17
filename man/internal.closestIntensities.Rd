@@ -35,3 +35,4 @@ calib <- internal.calibCombine(calib$led, calib$wavelength, calib$intensity, cal
 internal.closestIntensities(LightFitR::target_irradiance, calib)
 
 }
+\keyword{internal}

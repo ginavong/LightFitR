@@ -4,7 +4,7 @@
 #' @param peak_wavelengths Vector of stated LED peaks
 #'
 #' @returns Vector of wavelengths closest to the stated peaks
-#' @noRd
+#' @keywords internal
 #'
 #' @examples
 #' calib_wavelengths = LightFitR::calibration$wavelength

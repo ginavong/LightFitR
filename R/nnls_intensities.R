@@ -23,21 +23,21 @@ nnls_intensities = function(irradiance_matrix, closest_intensities, calibration_
 
   # Setup
 
-  calib = LightFitR::internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
-  peakWavelengths = LightFitR::internal.closestWavelength(unique(calib$wavelength), peaks)
+  calib = internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
+  peakWavelengths = internal.closestWavelength(unique(calib$wavelength), peaks)
 
   ## Checks
   LightFitR::helio.checkFormat(irradiance_matrix)
-  LightFitR::helio.checkWhite(irradiance_matrix)
-  LightFitR::internal.checkNAs(irradiance_matrix)
+  helio.checkWhite(irradiance_matrix)
+  internal.checkNAs(irradiance_matrix)
   LightFitR::helio.checkFormat(closest_intensities)
-  LightFitR::helio.checkWhite(closest_intensities)
-  LightFitR::internal.checkNAs(closest_intensities)
+  helio.checkWhite(closest_intensities)
+  internal.checkNAs(closest_intensities)
   LightFitR::checkRange(irradiance_matrix, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 
   ## Remove white LED
-  irradMat = LightFitR::internal.rmWhite(irradiance_matrix)
-  closestMat = LightFitR::internal.rmWhite(closest_intensities)
+  irradMat = internal.rmWhite(irradiance_matrix)
+  closestMat = internal.rmWhite(closest_intensities)
 
   # NNLS
 
@@ -60,7 +60,7 @@ nnls_intensities = function(irradiance_matrix, closest_intensities, calibration_
   })
 
   # Add back white LED
-  intensities_mat = LightFitR::internal.addWhiteZero(intensities_mat)
+  intensities_mat = internal.addWhiteZero(intensities_mat)
 
   graphics::image(intensities_mat, main='predicted intensities')
 
