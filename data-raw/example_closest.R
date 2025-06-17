@@ -6,7 +6,7 @@ calib = LightFitR::calibration
 calib = LightFitR::internal.calibCombine(calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 
 # Make closest intensities
-example_closest = internal.closestIntensities(target_irradiance, calib)
+example_closest = LightFitR::internal.closestIntensities(target_irradiance, calib)
 
 # Format
 rownames(example_closest) = LightFitR::helio.dyna.leds$name
