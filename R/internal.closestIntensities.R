@@ -16,7 +16,7 @@
 #' # Run function
 #' internal.closestIntensities(LightFitR::target_irradiance, calib)
 #'
-internal.closestIntensities = function(irradiance_matrix, calibration_df, peaks=helio.dyna.leds$wavelength){
+internal.closestIntensities = function(irradiance_matrix, calibration_df, peaks=LightFitR::helio.dyna.leds$wavelength){
 
   # Setup
   irradMat = LightFitR::internal.rmWhite(irradiance_matrix)
