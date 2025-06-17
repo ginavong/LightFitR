@@ -13,5 +13,9 @@ helio.checkWhite(irradiance_matrix)
 Boolean: TRUE = pass, FALSE = fail
 }
 \description{
-Check that the 9th white channel is set to 0
+We currently cannot support programming the white (5700k) LED channel.
+}
+\examples{
+helio.checkWhite(LightFitR::target_irradiance)
+
 }

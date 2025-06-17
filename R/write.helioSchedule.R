@@ -17,7 +17,7 @@
 #' temptxt_name = tempfil(fileext='.txt')
 #' helio.writeSchedule(LightFitR::example_regime, temptxt_name, format='json')
 #'
-helio.writeSchedule = function(regime_matrix, filename, format=c('csv', 'json')){
+write.helioSchedule = function(regime_matrix, filename, format=c('csv', 'json')){
   if(format=='csv'){
     csv = LightFitR::helio.csv_schedule(regime_matrix, filename)
     utils::write.table(csv, file=filename, row.names=F, col.names=F, sep=';', quote=F)

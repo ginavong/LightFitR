@@ -15,3 +15,8 @@ Matrix containing the regime encoded by the Heliospectra script
 \description{
 Read a heliospectra script (json format) into a matrix.
 }
+\examples{
+example_file <- system.file("extdata", "example_json_schedule.txt", package = "LightFitR", mustWork = TRUE)
+read.helio_json(example_file)
+
+}

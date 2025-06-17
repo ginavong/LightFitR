@@ -5,7 +5,7 @@
 #' This writes a schedule for Heliospectra DYNA lights which randomly changes colour every second for a fun disco effect. The disco will last until the Heliospectra runs out of memory (150 events), so you can get 2 min 30s of disco out of your expensive lights...
 #' Enjoy!
 #'
-#' @inheritParams helio.writeSchedule
+#' @inheritParams write.helioSchedule
 #'
 #' @import lubridate
 #'

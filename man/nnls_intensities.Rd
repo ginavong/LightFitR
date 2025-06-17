@@ -35,3 +35,13 @@ Matrix of intensities to set the lights to, to achieve desired irradiances
 \description{
 Use non-linear least squares to interpolate intensities
 }
+\examples{
+# Prep variables
+target_irradiance = LightFitR::target_irradiance
+closest = LightFitR::example_closest
+calib = LightFitR::calibration
+
+# Run the function
+nnls_intensities(target_irradiance, closest,  calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+
+}

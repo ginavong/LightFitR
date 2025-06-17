@@ -26,3 +26,8 @@ Correctly formatted dataframe of calibration data, for use in other functions
 \description{
 Internal function to make a calibration dataframe from user-supplied vectors of calibration data
 }
+\examples{
+calib <- LightFitR::calibration
+internal.calibCombine(calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+
+}

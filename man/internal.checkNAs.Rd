@@ -15,3 +15,7 @@ Boolean: TRUE = pass, FALSE = fail
 \description{
 Internal function to check matrix for NAs
 }
+\examples{
+internal.checkNAs(LightFitR::example_intensities)
+
+}

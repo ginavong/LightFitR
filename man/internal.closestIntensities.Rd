@@ -25,3 +25,13 @@ Matrix of closest intensities, in the same format as `irradiance_matrix`
 \description{
 Internal function. Find the intensities corresponding to the closest irradiance match between intended and calibration.
 }
+\examples{
+
+# Format calibration data correctly
+calib <- LightFitR::calibration
+calib <- internal.calibCombine(calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+
+# Run function
+internal.closestIntensities(LightFitR::target_irradiance, calib)
+
+}

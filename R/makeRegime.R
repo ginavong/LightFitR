@@ -1,14 +1,15 @@
 #' Create a regime (matrix) to program lights to achieve intended irradiances
 #'
 #' @description
-#' This wrapper function carries out multiple steps:
+#' This is a wrapper function that carries out multiple steps:
 #'
-#' \ennumerate{
-#'  \item Calculate closest intensities
-#'  \item Predict the intensities to use to achieve the target irradiance (via a system of linear equations or non-negative least squares)
-#'  \item Tidy the intensities (rounding to integer, keep within the range of intensities that the lights can be set to)
-#'  \item Format the intensities and timestamps into a human-readable regime matrix
-#' }
+#' 1. Calculate closest intensities
+#'
+#' 2. Predict the intensities to use to achieve the target irradiance (via a system of linear equations or non-negative least squares)
+#'
+#' 3. Tidy the intensities (rounding to integer, keep within the range of intensities that the lights can be set to)
+#'
+#' 4. Format the intensities and timestamps into a human-readable regime matrix
 #'
 #' @section NNLS vs SLE:
 #'

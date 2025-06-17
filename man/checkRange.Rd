@@ -29,3 +29,9 @@ Boolean: TRUE = pass, FALSE = fail
 \description{
 Check that the intended irradiances are acheivable by the lights
 }
+\examples{
+calib <- LightFitR::calibration
+irradiances <- LightFitR::target_irradiance
+checkRange(irradiances, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+
+}

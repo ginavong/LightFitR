@@ -15,3 +15,7 @@ Matrix of irradiances, with 9th row removed as we currently don't support 5700k 
 \description{
 Remove empty white (5700k) LED from calculations
 }
+\examples{
+internal.rmWhite(LightFitR::target_irradiance)
+
+}

@@ -15,3 +15,8 @@ Matrix of times. Each row corresponds to hours, minutes, seconds
 \description{
 Internal function. Takes vector of timepoints (POSICxt format) and converts into format readable by heliospectra.
 }
+\examples{
+print(LightFitR::time_vector)
+internal.makeTimes(LightFitR::time_vector)
+
+}

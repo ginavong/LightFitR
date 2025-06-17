@@ -87,13 +87,3 @@
 #' }
 #'
 "example_regime"
-
-#' example json schedule
-#'
-#' Example Heliospectra schedule in json format.This schedule was run to calibrate the lights.
-#'
-#' @format A .txt file with a Heliospectra schedule in the json format.
-#'
-#' @source https://github.com/ginavong/2024_LightFitR_MethodsPaper/blob/master/data/regimes/calibration/calibration.txt
-#'
-"example_json_schedule.txt"
