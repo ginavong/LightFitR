@@ -11,7 +11,7 @@
 #' helio.checkWhite(LightFitR::target_irradiance)
 #'
 helio.checkWhite = function(irradiance_matrix){
-  if(unique(irradiance_matrix[9,]) ==0){
+  if(all(unique(irradiance_matrix[9,]) ==0)){
     return(TRUE)
   }
   else{
