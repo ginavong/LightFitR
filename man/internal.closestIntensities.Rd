@@ -7,7 +7,7 @@
 internal.closestIntensities(
   irradiance_matrix,
   calibration_df,
-  peaks = helio.dyna.leds$wavelength
+  peaks = LightFitR::helio.dyna.leds$wavelength
 )
 }
 \arguments{

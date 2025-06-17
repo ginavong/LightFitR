@@ -6,6 +6,11 @@
 \usage{
 helio.disco(filename, format = c("csv", "json"))
 }
+\arguments{
+\item{filename}{Character. Filename to export to}
+
+\item{format}{Character. Which format to export to? csv or json. Use extensions '.csv' or '.txt'}
+}
 \description{
 Congratulations! You've found the easter egg function!
 }
