@@ -4,6 +4,7 @@
 #'
 #' @format Integer representing maximum allowable events
 #'
+#'
 "helio.eventLimit"
 
 #' heliospectra DYNA LEDs
@@ -18,6 +19,7 @@
 #'}
 #'
 #'@source <https://heliospectra.com/led-grow-lights/dyna/>
+#'
 #'
 "helio.dyna.leds"
 
@@ -37,6 +39,8 @@
 #'
 #'@source <https://github.com/ginavong/2024_LightFitR_MethodsPaper/blob/master/data/heliospectra_measurements/calibration/Apollo_Calib_20240827/Apollo_calibration_annotated_20240827.Rda>
 #'
+#'
+#'
 "calibration"
 
 #' target irradiances
@@ -44,6 +48,8 @@
 #' Matrix of random target irradiances for example purposes
 #'
 #' @format A matrix with 9 rows and 10 columns: each row represents an LED channel and each column represents an event
+#'
+#'
 #'
 "target_irradiance"
 
@@ -53,6 +59,7 @@
 #'
 #' @format A matrix with 9 rows and 10 columns: each row represents an LED channel and each column represents an event
 #'
+#'
 "example_closest"
 
 #' example intensities
@@ -61,6 +68,8 @@
 #'
 #' @format A matrix with 9 rows and 10 columns: each row represents an LED channel and each column represents an event
 #'
+#'
+#'
 'example_intensities'
 
 #' time vector
@@ -68,6 +77,8 @@
 #' Example timepoints for events
 #'
 #' @format A vector of length 10 with timepoints in POSIXct format
+#'
+#'
 #'
 "time_vector"
 
@@ -85,5 +96,7 @@
 #'  \item{400nm}{Intensity at 400nm LED channel}
 #'  \item{etc.}
 #' }
+#'
+#'
 #'
 "example_regime"

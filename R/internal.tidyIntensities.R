@@ -4,6 +4,7 @@
 #' @inheritParams internal.calibCombine
 #'
 #' @return Maxtrix of intensities which are integers and capped at the maximum possible intensity
+#' @noRd
 #'
 #' @examples
 #'

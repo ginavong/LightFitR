@@ -8,7 +8,7 @@
 #'
 #' @importFrom utils write.table
 #'
-#' @export File (format specified by user) that is readable by Heliospectra Lights
+#' @export
 #'
 #' @examples
 #' tempcsv_name = tempfile(fileext='.csv')

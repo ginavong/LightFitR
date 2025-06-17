@@ -8,6 +8,7 @@
 #' @import nnls
 #'
 #' @return Matrix of intensities to set the lights to, to achieve desired irradiances
+#' @export
 #'
 #' @examples
 #' # Prep variables

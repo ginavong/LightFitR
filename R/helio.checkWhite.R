@@ -5,6 +5,7 @@
 #' @param irradiance_matrix Matrix of intended irradiances. rows = leds and columns = events
 #'
 #' @return Boolean: TRUE = pass, FALSE = fail
+#' @noRd
 #'
 #' @examples
 #' helio.checkWhite(LightFitR::target_irradiance)

@@ -3,6 +3,7 @@
 #' @inheritParams internal.closestIntensities
 #'
 #' @returns Matrix of irradiances, with 9th row removed as we currently don't support 5700k LED channel
+#' @noRd
 #'
 #' @examples
 #' internal.rmWhite(LightFitR::target_irradiance)

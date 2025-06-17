@@ -3,6 +3,7 @@
 #' @inheritParams write.helioSchedule
 #'
 #' @return Character in json format that Heliospectra can parse
+#' @export
 #'
 #' @examples
 #' tempfile_name = tempfile(fileext='.txt')

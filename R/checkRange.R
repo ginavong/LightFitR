@@ -4,6 +4,7 @@
 #' @inheritParams internal.calibCombine
 #'
 #' @return Boolean: TRUE = pass, FALSE = fail
+#' @export
 #'
 #' @examples
 #' calib <- LightFitR::calibration

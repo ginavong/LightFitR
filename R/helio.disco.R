@@ -9,7 +9,7 @@
 #'
 #' @import lubridate
 #'
-#' @export Heliospectra file with random disco
+#' @export
 #'
 #' @examples
 #' tempfile_name = tempfile(fileext='.txt')

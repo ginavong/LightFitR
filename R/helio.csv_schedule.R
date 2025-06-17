@@ -3,6 +3,7 @@
 #' @inheritParams write.helioSchedule
 #'
 #' @return Matrix formatted for Heliospectra lights csv
+#' @export
 #'
 #' @examples
 #' tempfile_name = tempfile(fileext='.csv')

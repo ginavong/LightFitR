@@ -23,6 +23,7 @@
 #' @param method Use 'nnls' (non-negative least squares) or 'sle' (system of linear equations)
 #'
 #' @return Matrix with light regime needed to program the lights
+#' @export
 #'
 #' @examples
 #' # Prep variables
