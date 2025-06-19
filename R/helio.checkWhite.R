@@ -7,8 +7,6 @@
 #' @return Boolean: TRUE = pass, FALSE = fail
 #' @keywords internal
 #'
-#' @examples
-#' helio.checkWhite(LightFitR::target_irradiance)
 #'
 helio.checkWhite = function(irradiance_matrix){
   if(all(unique(irradiance_matrix[9,]) ==0)){

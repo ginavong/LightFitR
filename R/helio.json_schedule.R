@@ -25,7 +25,7 @@ helio.json_schedule = function(regime_matrix, filename){
   # Define variables
   nEvents = ncol(regime_matrix)
 
-  wlVec=paste(sapply(helio.dyna.leds[,'wavelength'], function(light){
+  wlVec=paste(sapply(LightFitR::helio.dyna.leds[,'wavelength'], function(light){
     paste("{\"wl\" : ", light, ",\"pwr\": 94 }", sep="")
   }), collapse = ",\n")
 
