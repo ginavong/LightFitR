@@ -15,9 +15,4 @@ Matrix of intensities with 9 rows
 \description{
 Add white (5700k) LED to intensities matricies after calculations
 }
-\examples{
-intensities <- LightFitR::example_intensities[-9,]
-internal.addWhiteZero(intensities)
-
-}
 \keyword{internal}

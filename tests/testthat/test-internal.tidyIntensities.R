@@ -6,7 +6,7 @@ mat = matrix(sample(sample_space, size=9*10, replace=TRUE), nrow=9)
 
 calib = LightFitR::calibration
 
-output = LightFitR::internal.tidyIntensities(mat, calib$intensity)
+output = LightFitR:::internal.tidyIntensities(mat, calib$intensity)
 
 # Tests
 

@@ -6,5 +6,5 @@ expected = mat[1:8,]
 # Test
 
 test_that("It works", {
-  expect_equal(LightFitR::internal.rmWhite(mat), expected)
+  expect_equal(LightFitR:::internal.rmWhite(mat), expected)
 })

@@ -6,12 +6,6 @@
 #' @returns Vector of wavelengths closest to the stated peaks
 #' @keywords internal
 #'
-#' @examples
-#' calib_wavelengths = LightFitR::calibration$wavelength
-#' peaks = LightFitR::helio.dyna.leds$wavelength
-#'
-#' internal.closestWavelength(calib_wavelengths, peaks)
-#'
 internal.closestWavelength = function(wavelength_vec, peak_wavelengths){
 
   if(all(peak_wavelengths %in% unique(wavelength_vec))){

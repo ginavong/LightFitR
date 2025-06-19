@@ -6,5 +6,5 @@ finished_mat = rbind(test_mat, rep(0, nrow(test_mat)))
 
 # Test
 test_that("It makes the desired matrix", {
-  expect_equal(LightFitR::internal.addWhiteZero(test_mat), finished_mat)
+  expect_equal(LightFitR:::internal.addWhiteZero(test_mat), finished_mat)
 })

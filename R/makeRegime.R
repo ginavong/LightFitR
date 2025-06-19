@@ -35,7 +35,7 @@
 #' makeRegime(times, target_irradiance, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 #'
 #'
-makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=LightFitR::helio.dyna.leds$wavelength, method='nnls'){
+makeRegime = function(timeVector_POSIXct, irradiance_matrix, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=LightFitR::helio.dyna.leds$wavelength, method='nnls'){
 
   # Setup
   calibrationDf = internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
@@ -49,7 +49,7 @@ makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, ca
   LightFitR::checkRange(irradiance_matrix, calibrationDf$led, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance)
 
   # Times
-  times = internal.makeTimes(timeVector_POSICx)
+  times = internal.makeTimes(timeVector_POSIXct)
 
   # Calculate intensities
   closestIntensities = internal.closestIntensities(irradiance_matrix, calibrationDf, peaks=peaks)

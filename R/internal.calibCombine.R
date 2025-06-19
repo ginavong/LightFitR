@@ -10,10 +10,6 @@
 #' @return Correctly formatted dataframe of calibration data, for use in other functions
 #' @keywords internal
 #'
-#' @examples
-#' calib <- LightFitR::calibration
-#' internal.calibCombine(calib$led, calib$wavelength, calib$intensity, calib$irradiance)
-#'
 internal.calibCombine = function(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances){
 
   calibList = list(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)

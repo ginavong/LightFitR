@@ -9,11 +9,11 @@ mat_nas[7,19] = NA
 # Tests
 
 test_that("It passes", {
-  expect_true(LightFitR::internal.checkNAs(mat))
+  expect_true(LightFitR:::internal.checkNAs(mat))
 })
 
 test_that("It warns",{
-  expect_warning(output <- LightFitR::internal.checkNAs(mat_nas), 'Your matrix contains NAs. The heliospectra cannot accept NAs as input \n')
+  expect_warning(output <- LightFitR:::internal.checkNAs(mat_nas), 'Your matrix contains NAs. The heliospectra cannot accept NAs as input \n')
 
   expect_false(output)
 })

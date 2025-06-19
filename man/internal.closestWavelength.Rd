@@ -17,11 +17,4 @@ Vector of wavelengths closest to the stated peaks
 \description{
 Internal function. Find the closest wavelengths to the stated peaks
 }
-\examples{
-calib_wavelengths = LightFitR::calibration$wavelength
-peaks = LightFitR::helio.dyna.leds$wavelength
-
-internal.closestWavelength(calib_wavelengths, peaks)
-
-}
 \keyword{internal}

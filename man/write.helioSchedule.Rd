@@ -18,9 +18,9 @@ Writes to json or csv format
 }
 \examples{
 tempcsv_name = tempfile(fileext='.csv')
-helio.writeSchedule(LightFitR::example_regime, tempcsv_name, format='csv')
+write.helioSchedule(LightFitR::example_regime, tempcsv_name, format='csv')
 
-temptxt_name = tempfil(fileext='.txt')
-helio.writeSchedule(LightFitR::example_regime, temptxt_name, format='json')
+temptxt_name = tempfile(fileext='.txt')
+write.helioSchedule(LightFitR::example_regime, temptxt_name, format='json')
 
 }

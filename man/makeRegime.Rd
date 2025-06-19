@@ -5,7 +5,7 @@
 \title{Create a regime (matrix) to program lights to achieve intended irradiances}
 \usage{
 makeRegime(
-  timeVector_POSICx,
+  timeVector_POSIXct,
   irradiance_matrix,
   calibration_leds,
   calibration_wavelengths,
@@ -16,6 +16,8 @@ makeRegime(
 )
 }
 \arguments{
+\item{timeVector_POSIXct}{Vector of schedule timepoints in POSICxt format}
+
 \item{irradiance_matrix}{Matrix of intended irradiances. rows = leds and columns = events}
 
 \item{calibration_leds}{A numeric vector of LED values from calibration, mapping to intensities and irradiances (i.e. the same length)}
