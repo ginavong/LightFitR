@@ -94,9 +94,7 @@
 #'  \item{second}{The second of the event}
 #'  \item{380nm}{Intensity at 380nm LED channel}
 #'  \item{400nm}{Intensity at 400nm LED channel}
-#'  \item{etc.}
+#'  \item{etc.}{}
 #' }
-#'
-#'
 #'
 "example_regime"
