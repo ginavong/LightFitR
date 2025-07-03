@@ -1,12 +1,16 @@
 Package: LightFitR
 Type: Package
 Title: Design Complex Light Regimes
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: person('Gina', 'Vong', email='gywv500@york.ac.uk', role=c('aut', 'cre'))
 Maintainer: The package maintainer <gywv500@york.ac.uk>
-Description: A system for accurately designing complex light regimes for plant biology experiments.
+Description: A system for accurately designing complex light regimes using LEDs.
+    Takes calibration data and user-defined target irradiances and it tells  you
+    what intensities to use.
 License: GPL (>= 3)
 Encoding: UTF-8
+URL: https://doi.org/10.1101/2025.06.06.658293
+BugReports: https://github.com/ginavong/LightFitR/issues
 LazyData: true
 Includes: 
   nnls,
@@ -21,5 +25,8 @@ Imports:
     stringr
 RoxygenNote: 7.3.2
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0)
 Config/testthat/edition: 3
+VignetteBuilder: knitr
