@@ -10,6 +10,15 @@
 The goal of LightFitR is to allow scientists to program complex light
 regimes with confidence.
 
+Often, LED light fixtures are programmed with ‘intensity’ units, which
+often does not scale linearly with the actual measured light output from
+the light fixtures. Further, if using multiple wavelength channels,
+there will often be bleedthrough between the channels, affecting the
+quality and quantity of light received by your experimental subjects.
+Our package takes calibration data and user-defined target irradiances
+and it tells you what intensities to use in order to achieve those
+irradiances.
+
 ## Installation
 
 You can install the development version of LightFitR from
@@ -35,11 +44,10 @@ target_irradiance <- LightFitR::target_irradiance
 # Run function
 makeRegime(times, target_irradiance, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 #> Ranges fall within irradiances acheivable by heliospectra: TRUE
-#> Warning in
-#> LightFitR::internal.closestWavelength(unique(calibration_df$wavelength), : We
+#> Warning in internal.closestWavelength(unique(calibration_df$wavelength), : We
 #> couldn't find exact matches with the peak wavelengths specified. Returning the
 #> closest wavelengths
-#> Warning in LightFitR::internal.closestWavelength(unique(calib$wavelength), : We
+#> Warning in internal.closestWavelength(unique(calib$wavelength), peaks): We
 #> couldn't find exact matches with the peak wavelengths specified. Returning the
 #> closest wavelengths
 #> Ranges fall within irradiances acheivable by heliospectra: TRUE

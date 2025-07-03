@@ -4,12 +4,7 @@
 #' @param peak_wavelengths Vector of stated LED peaks
 #'
 #' @returns Vector of wavelengths closest to the stated peaks
-#'
-#' @examples
-#' calib_wavelengths = LightFitR::calibration$wavelength
-#' peaks = LightFitR::helio.dyna.leds$wavelength
-#'
-#' internal.closestWavelength(calib_wavelengths, peaks)
+#' @keywords internal
 #'
 internal.closestWavelength = function(wavelength_vec, peak_wavelengths){
 

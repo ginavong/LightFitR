@@ -1,0 +1,276 @@
+---
+title: "LightFitR"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{LightFitR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(LightFitR)
+```
+
+# Introduction
+
+LightFitR is an R package for designing complex light regimes with LED lights. 
+Often, these light fixtures are programmed with 'intensity' units, which often does not scale linearly with the actual measured light output from the light fixtures.
+Further, if using multiple wavelength channels, there will often be bleedthrough between the channels, affecting the quality and quantity of light received by your experimental subjects.
+Our package aims to combat both of these challenges.
+It takes calibration data and user-defined target irradiances and it tells  you what intensities to use in order to achieve those irradiances.
+
+**Note that this package does not support broad spectrum white LEDs**
+
+## Terminology
+
+This packages uses 'intensity' to mean the unitless settings that the light fixture uses.
+'irradiance' means the measured light output from the fixture.This can be in the users' preferred light units, provided it is used consistently throughout.
+'regime' refers to a repeating daily schedule that the light fixtures run on.
+'event' refers to the point in the light regime when the lights change intensity.
+
+# Getting started
+
+You will need several inputs: 
+
+- calibration data from your light fixture
+- target irradiances that you want your lights to achieve.
+- timepoints for your events
+
+## Calibration data
+
+Your calibration data must have these 4 columns:
+
+- LED channel: which channel the given measurement corresponds to
+- Intensity: the intensity setting used on that channel to achieve the measurement
+- Wavelength: the wavelength of the measurement (if using a light meter which doesn't measure irradiance across multiple wavelengths, set the wavelength to the peak wavelength of the channel)
+- Irradiance: The measured light output on that LED channel at that intensity. This can be in any units your measurement device uses, provided you use the same units throughout.
+
+For more information about how to collect calibration data, see https://doi.org/10.1101/2025.06.06.658293
+
+Here is an example of what the calibration data could look like:
+```{r}
+calibration <- LightFitR::calibration
+head(calibration)
+```
+
+## Target irradiance
+
+The target irradiances are a set of irradiances that you wish to achieve for your experiment.
+
+This should be a matrix, with rows representing LED channels and columns representing timepoints or events.
+
+For example:
+
+```{r}
+target <- LightFitR::target_irradiance
+print(target)
+```
+
+## Event timepoints
+
+This should be a vector with a length the same as the column number of your target irradiances.
+
+Each event timepoint should be in the POSIXct format. 
+The date can be arbitrary as the package only cares about the timestamp.
+We recommend the `lubridate` package for working with times.
+
+For example:
+```{r}
+times <- LightFitR::time_vector
+print(times)
+```
+
+## Creating the regime of intensities
+
+Now you have all the inputs, let's make a regime:
+
+```{r}
+regime <- makeRegime(times, target, calibration$led, calibration$wavelength, calibration$intensity, calibration$irradiance)
+print(regime)
+```
+
+As you can see, the `makeRegime` function automatically creates a heatmap of your regime to allow the user to sanity check the intensity output.
+
+It also creates a matrix of intensities for you to set your lights to.
+The layout is very similar to that of the target matrix. But with extra rows for the timepoints, since some models of lights requires that.
+
+## Exporting the regime
+
+Currently, we can only export regimes compatible with Heliospectra DYNA(TM) lights running the R3.2.2-Release firmware.
+
+```{r}
+write.helioSchedule(regime, filename='my_regime.txt', format='json')
+```
+
+If you do not use this model of light, you can still write the regime matrix to a csv.
+Or you're very welcome to write your own function to format the regime to be compatible with your model of lights!
+
+# How it works
+
+`makeRegime` is the core user-facing function in this package.
+But you probably want to know what is happening behind the scenes.
+We will summarise below, and full explanation is available at: https://doi.org/10.1101/2025.06.06.658293
+
+When you run `makeRegime`, it carries out 4 steps in the background:
+
+1. Calculate closest intensities
+2. Predict the intensities to use to achieve the target irradiance (via a system of linear equations or non-negative least squares)
+3. Tidy the intensities (rounding to integer, keep within the range of intensities that the lights can be set to)
+4. Format the intensities and timestamps into a human-readable regime matrix
+
+We'll go through each of the steps below.
+
+## Closest intensities
+
+This step searches through the calibration data to find intensities which produce the closest irradiances to your target irradiance.
+
+Using the example target irradiances from above:
+
+```{r}
+closest <- LightFitR::internal.closestIntensities(target, calibration[, c(3,5,4,6)])
+rownames(closest) <- LightFitR::helio.dyna.leds$name
+print(closest)
+```
+
+We've got a matrix of intensities for each channel and event!
+
+To convince ourselves that these are indeed the closest, we can compare our target irradiances with the calibration data.
+Let's do this for the first event:
+
+```{r}
+
+# Define variables
+
+## Calibration
+calib_wavelengths <- unique(calibration$wavelength)
+calib_intensities <- unique(calibration$intensity)
+
+## Subset the closest matrix to the first event
+closest_first <- closest[,1]
+print(closest_first)
+
+## Subset the targets
+target_first <- target[,1]
+print(target_first)
+
+# Go through each channel of the first event
+sapply(1:length(closest_first), function(i){
+  
+  ## Set relevant variables
+  tar <- target_first[i]
+  clo <- closest_first[i]
+  led <- helio.dyna.leds[i, 'wavelength']
+  
+  ## Subset calibration data to the LED at the peak wavelengths
+  criteria <- calibration$led==led & calibration$wavelength==LightFitR:::internal.closestWavelength(calib_wavelengths, led)
+  calib_subset <- calibration[criteria, 3:6]
+  
+  # Print outputs for user
+  print(names(clo))
+  print('This is the calibration data')
+  print(calib_subset)
+  print(paste('The target irradiance is', tar))
+  print(paste('The closest intensity is', clo))
+  print('---')
+  
+  return()
+})
+
+```
+
+These closest intensities are used in the next step.
+
+## Predict intensities using SLE or NNLS
+
+This step predicts the intensities to use, with a system of linear equations or non-negative least squares (a fancy version of SLE).
+
+First, it uses the closest intensities and calibration data to create a matrix of irradiances for each event. 
+Think of this as a heatmap with all of the bleedthrough between all the channels of the LED at the closest intensity.
+Again, we'll show this for the first event:
+
+```{r}
+
+# Define variables
+peakWavelengths <- LightFitR:::internal.closestWavelength(unique(calibration$wavelength), helio.dyna.leds[-9, 'wavelength'])
+firstEvent <- data.frame(led=LightFitR::helio.dyna.leds[-9, 'wavelength'], closest=closest_first[-9], intended=target_first[-9])
+rm(closest_first, target_first)
+
+mat <- sapply(1:nrow(firstEvent), function(j){
+  criteria <- (calibration$led == firstEvent[j, 'led']) & (calibration$intensity == firstEvent[j, 'closest']) & (calibration$wavelength %in% peakWavelengths) # We want the irradiances (from calibration data) of each LED at the intensity where it is closest to the intended irradiance
+  calibration[criteria, 'irradiance']
+})
+
+print(mat)
+image(mat)
+
+```
+
+The leading diagonal is quite intense (which is what we want!). 
+But as you can see, there is some bleedthrough between the channels, indicated by colour outside the leading diagonal.
+
+Next, we make a model either using NNLS or SLE (more on the differences below). 
+It solves the equation Ax=b, where A is the irradiance matrix (above), b are the target irradiances and x are unknown coefficients.
+
+For the first event, it looks like this:
+
+```{r}
+mod <- nnls::nnls(mat, firstEvent[,'intended'])
+print(mod)
+```
+
+Finally, we use the coefficients (solved by the model) as well as the closest intensities to calculate the intensities we need to set the lights to:
+
+```{r}
+intensities <- mod$x * firstEvent[, 'closest']
+print(intensities)
+```
+
+Great! We have our intensities! We can put that straight into the lights right?
+
+Well, most lights only accept whole numbers. 
+And, although not apparent in this example, sometimes we predict intensities which are impossible for the lights (e.g. above 1000 in the case of Heliospectra DYNAs).
+So this brings us onto the next step!
+
+## Tidying
+
+This is exactly as it sounds.
+We round our predicted intensities to the nearest integer, cap the predicted intensities to the maximum the lights can achieve (inferred from the calibration data), set any negative predictions to 0.
+
+```{r}
+tidied <- LightFitR:::internal.tidyIntensities(intensities, calib_intensities)
+print(tidied)
+```
+
+Much better!
+
+## Formatting
+
+This final step just takes the resultant matrix and makes it more human readable.
+It adds row and column names, as well as the event timepoints.
+You can't really show it with just the first event, and you already saw the tidied matrix in the 'get started' example.
+So there isn't really any code to show for this step...
+
+# System of linear equations (SLE) vs Non-negative least squares (NNLS)
+
+From our testing, there isn't much of a difference between SLE and NNLS when it comes to predicted intensities (https://doi.org/10.1101/2025.06.06.658293), except for occasional outliers.
+So if you're not happy with the intensities predicted by one method, try the other.
+The default for the package is NNLS but this was an arbitrary decision on our part.
+
+## SLE
+
+This is the 'simpler' of the two methods.
+It solves the equation Ax=b straightforwardly.
+However, for us, this means it can predict intensities below 0 (i.e. unachievable by the lights since 0 means the light is off) and intensities above the maximum (again, impossible on the lights).
+
+## NNLS
+
+This uses the Lawson-Hanson method to solve Ax=b in such a way that the predicted intensities are non-negative.
+This gets around the below 0 predictions, but can still predict intensities above the maximum.
+See the `nnls` package for more info on how NNLS works.

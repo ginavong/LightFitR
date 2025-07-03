@@ -5,17 +5,19 @@
 \title{Create a regime (matrix) to program lights to achieve intended irradiances}
 \usage{
 makeRegime(
-  timeVector_POSICx,
+  timeVector_POSIXct,
   irradiance_matrix,
   calibration_leds,
   calibration_wavelengths,
   calibration_intensities,
   calibration_irradiances,
-  peaks = helio.dyna.leds$wavelength,
+  peaks = LightFitR::helio.dyna.leds$wavelength,
   method = "nnls"
 )
 }
 \arguments{
+\item{timeVector_POSIXct}{Vector of schedule timepoints in POSICxt format}
+
 \item{irradiance_matrix}{Matrix of intended irradiances. rows = leds and columns = events}
 
 \item{calibration_leds}{A numeric vector of LED values from calibration, mapping to intensities and irradiances (i.e. the same length)}
@@ -34,5 +36,30 @@ makeRegime(
 Matrix with light regime needed to program the lights
 }
 \description{
-Create a regime (matrix) to program lights to achieve intended irradiances
+This is a wrapper function that carries out multiple steps:
+
+1. Calculate closest intensities
+
+2. Predict the intensities to use to achieve the target irradiance (via a system of linear equations or non-negative least squares)
+
+3. Tidy the intensities (rounding to integer, keep within the range of intensities that the lights can be set to)
+
+4. Format the intensities and timestamps into a human-readable regime matrix
+}
+\section{NNLS vs SLE}{
+
+
+NNLS and SLE largely predict the same intensities, except in outlier cases. The default is NNLS, but if your predicted intensities end up being very far off, try SLE.
+}
+
+\examples{
+# Prep variables
+calib <- LightFitR::calibration
+times <- LightFitR::time_vector
+target_irradiance <- LightFitR::target_irradiance
+
+# Run function
+makeRegime(times, target_irradiance, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+
+
 }

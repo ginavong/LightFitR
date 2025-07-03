@@ -5,6 +5,7 @@
 #' @importFrom utils read.delim
 #'
 #' @return Matrix containing the regime encoded by the Heliospectra script
+#' @export
 #'
 #' @examples
 #' example_file <- system.file("extdata", "example_json_schedule.txt", package = "LightFitR", mustWork = TRUE)

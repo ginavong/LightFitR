@@ -1,19 +1,12 @@
 ## code to prepare `example_intensities` dataset goes here
 
 # Setup
-set.seed(123)
+target = LightFitR::target_irradiance
+calib = LightFitR::calibration[, c(3,5,4,6)]
 
-# Generate matrix
-intensities = matrix(round(runif(n=10*8, min=0, max=1000)), nrow=8)
+closest = LightFitR:::internal.closestIntensities(target, calib)
 
-## Add 0 row for white 5700k LED
-example_intensities = rbind(intensities, rep(0, ncol(intensities)))
-
-# Format
-rownames(example_intensities) = LightFitR::helio.dyna.leds$name
-
-# Tidy
-rm(intensities)
+example_intensities = LightFitR::nnls_intensities(target, closest, calib$led, calib$wavelength, calib$intensity, calib$irradiance, peaks=LightFitR::helio.dyna.leds$wavelength)
 
 # Export
 

@@ -5,11 +5,11 @@
 #' This writes a schedule for Heliospectra DYNA lights which randomly changes colour every second for a fun disco effect. The disco will last until the Heliospectra runs out of memory (150 events), so you can get 2 min 30s of disco out of your expensive lights...
 #' Enjoy!
 #'
-#' @inheritParams helio.writeSchedule
+#' @inheritParams write.helioSchedule
 #'
 #' @import lubridate
 #'
-#' @export Heliospectra file with random disco
+#' @export
 #'
 #' @examples
 #' tempfile_name = tempfile(fileext='.txt')
@@ -31,7 +31,7 @@ helio.disco = function(filename, format=c('csv', 'json')){
   # Get times
   time_vec = seq(from=lubridate::hms('00:00:00'), by=lubridate::seconds(1), length.out=nEvents)
   time_vec = as.POSIXct(time_vec, origin=lubridate::origin, tz='GMT')
-  time_mat = LightFitR::internal.makeTimes(time_vec)
+  time_mat = internal.makeTimes(time_vec)
 
   # Make regime
   regime = as.matrix(rbind(time_mat, refinedRandom, c(rep(0, nEvents)))) #make white light = 0 the whole time

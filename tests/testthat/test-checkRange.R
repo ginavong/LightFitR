@@ -46,4 +46,4 @@ test_that("Check fails when multiple channels are too out of range", {
                  "Please check that your intended irradiances are achievable by the heliospectra. Your intended range for 400nm channel seems to be outside the achievable range.")
   expect_warning(LightFitR::checkRange(intended3, calib$led, calib$wavelength, calib$intensity, calib$irradiance),
                  "Please check that your intended irradiances are achievable by the heliospectra. Your intended range for 450nm channel seems to be outside the achievable range.")
-# })
+ })

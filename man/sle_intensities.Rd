@@ -11,7 +11,7 @@ sle_intensities(
   calibration_wavelengths,
   calibration_intensities,
   calibration_irradiances,
-  peaks = helio.dyna.leds$wavelength
+  peaks = LightFitR::helio.dyna.leds$wavelength
 )
 }
 \arguments{
@@ -29,6 +29,19 @@ sle_intensities(
 
 \item{peaks}{Vector of length 8 or 9. Containing wavelengths at which each LED peaks.}
 }
+\value{
+Matrix of intensities to set the lights to, to achieve desired irradiances
+}
 \description{
 Use a system of linear equations to calculate intensities
+}
+\examples{
+#' # Prep variables
+target_irradiance = LightFitR::target_irradiance
+closest = LightFitR::example_closest
+calib = LightFitR::calibration
+
+# Run the function
+sle_intensities(target_irradiance, closest,  calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+
 }

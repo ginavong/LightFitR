@@ -1,14 +1,15 @@
 #' Create a regime (matrix) to program lights to achieve intended irradiances
 #'
 #' @description
-#' This wrapper function carries out multiple steps:
+#' This is a wrapper function that carries out multiple steps:
 #'
-#' \ennumerate{
-#'  \item Calculate closest intensities
-#'  \item Predict the intensities to use to achieve the target irradiance (via a system of linear equations or non-negative least squares)
-#'  \item Tidy the intensities (rounding to integer, keep within the range of intensities that the lights can be set to)
-#'  \item Format the intensities and timestamps into a human-readable regime matrix
-#' }
+#' 1. Calculate closest intensities
+#'
+#' 2. Predict the intensities to use to achieve the target irradiance (via a system of linear equations or non-negative least squares)
+#'
+#' 3. Tidy the intensities (rounding to integer, keep within the range of intensities that the lights can be set to)
+#'
+#' 4. Format the intensities and timestamps into a human-readable regime matrix
 #'
 #' @section NNLS vs SLE:
 #'
@@ -22,6 +23,7 @@
 #' @param method Use 'nnls' (non-negative least squares) or 'sle' (system of linear equations)
 #'
 #' @return Matrix with light regime needed to program the lights
+#' @export
 #'
 #' @examples
 #' # Prep variables
@@ -33,24 +35,24 @@
 #' makeRegime(times, target_irradiance, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 #'
 #'
-makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=LightFitR::helio.dyna.leds$wavelength, method='nnls'){
+makeRegime = function(timeVector_POSIXct, irradiance_matrix, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=LightFitR::helio.dyna.leds$wavelength, method='nnls'){
 
   # Setup
-  calibrationDf = LightFitR::internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
+  calibrationDf = internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
 
   ## Checks
 
-  LightFitR::internal.checkNAs(irradiance_matrix)
+  internal.checkNAs(irradiance_matrix)
   LightFitR::helio.checkFormat(irradiance_matrix)
-  LightFitR::helio.checkWhite(irradiance_matrix)
+  helio.checkWhite(irradiance_matrix)
 
   LightFitR::checkRange(irradiance_matrix, calibrationDf$led, calibrationDf$wavelength, calibrationDf$intensity, calibrationDf$irradiance)
 
   # Times
-  times = LightFitR::internal.makeTimes(timeVector_POSICx)
+  times = internal.makeTimes(timeVector_POSIXct)
 
   # Calculate intensities
-  closestIntensities = LightFitR::internal.closestIntensities(irradiance_matrix, calibrationDf, peaks=peaks)
+  closestIntensities = internal.closestIntensities(irradiance_matrix, calibrationDf, peaks=peaks)
 
   switch(method,
 
@@ -64,7 +66,7 @@ makeRegime = function(timeVector_POSICx, irradiance_matrix, calibration_leds, ca
   # Formatting
 
   ## Tidy up
-  intensities = LightFitR::internal.tidyIntensities(intensities, calibration_intensities)
+  intensities = internal.tidyIntensities(intensities, calibration_intensities)
 
   # Make regime
   regime = as.matrix(rbind(times, intensities))

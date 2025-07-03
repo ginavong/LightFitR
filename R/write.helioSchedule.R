@@ -8,16 +8,16 @@
 #'
 #' @importFrom utils write.table
 #'
-#' @export File (format specified by user) that is readable by Heliospectra Lights
+#' @export
 #'
 #' @examples
 #' tempcsv_name = tempfile(fileext='.csv')
-#' helio.writeSchedule(LightFitR::example_regime, tempcsv_name, format='csv')
+#' write.helioSchedule(LightFitR::example_regime, tempcsv_name, format='csv')
 #'
-#' temptxt_name = tempfil(fileext='.txt')
-#' helio.writeSchedule(LightFitR::example_regime, temptxt_name, format='json')
+#' temptxt_name = tempfile(fileext='.txt')
+#' write.helioSchedule(LightFitR::example_regime, temptxt_name, format='json')
 #'
-helio.writeSchedule = function(regime_matrix, filename, format=c('csv', 'json')){
+write.helioSchedule = function(regime_matrix, filename, format=c('csv', 'json')){
   if(format=='csv'){
     csv = LightFitR::helio.csv_schedule(regime_matrix, filename)
     utils::write.table(csv, file=filename, row.names=F, col.names=F, sep=';', quote=F)

@@ -20,6 +20,11 @@ knitr::opts_chunk$set(
 
 The goal of LightFitR is to allow scientists to program complex light regimes with confidence.
 
+Often, LED light fixtures are programmed with 'intensity' units, which often does not scale linearly with the actual measured light output from the light fixtures.
+Further, if using multiple wavelength channels, there will often be bleedthrough between the channels, affecting the quality and quantity of light received by your experimental subjects.
+Our package takes calibration data and user-defined target irradiances and it tells you what intensities to use in order to achieve those irradiances.
+
+
 ## Installation
 
 You can install the development version of LightFitR from [GitHub](https://github.com/ginavong/LightFitR) with:

@@ -4,6 +4,7 @@
 #' @inheritParams internal.calibCombine
 #'
 #' @return Boolean: TRUE = pass, FALSE = fail
+#' @export
 #'
 #' @examples
 #' calib <- LightFitR::calibration
@@ -13,7 +14,7 @@
 checkRange = function(intended_irradiance, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances){
 
   # Make calibration dataframe
-  calib = LightFitR::internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
+  calib = internal.calibCombine(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances)
 
   # Go through each LED and check the ranges line up. Outputs vector of booleans
   rangeCheck = sapply(1:nrow(LightFitR::helio.dyna.leds), function(i){

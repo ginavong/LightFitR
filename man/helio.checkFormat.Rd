@@ -13,5 +13,10 @@ helio.checkFormat(check_matrix)
 Vector of booleans: TRUE = pass, FALSE = fail
 }
 \description{
-Check formatting of the heliospectra matrices
+Heliospectra DYNA matrices should have 9 rows (1 for each LED channel) and up to 150 columns (max number of events that Heliospectra DYNA can store)
+}
+\examples{
+matrix_to_check <- LightFitR::target_irradiance
+helio.checkFormat(target_irradiance)
+
 }

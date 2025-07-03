@@ -2,7 +2,7 @@
 % Please edit documentation in R/helio.disco.R
 \name{helio.disco}
 \alias{helio.disco}
-\title{Write a disco schedule for fun!}
+\title{Turn Heliospectra into disco lights}
 \usage{
 helio.disco(filename, format = c("csv", "json"))
 }
@@ -12,5 +12,14 @@ helio.disco(filename, format = c("csv", "json"))
 \item{format}{Character. Which format to export to? csv or json. Use extensions '.csv' or '.txt'}
 }
 \description{
-Write a disco schedule for fun!
+Congratulations! You've found the easter egg function!
+}
+\details{
+This writes a schedule for Heliospectra DYNA lights which randomly changes colour every second for a fun disco effect. The disco will last until the Heliospectra runs out of memory (150 events), so you can get 2 min 30s of disco out of your expensive lights...
+Enjoy!
+}
+\examples{
+tempfile_name = tempfile(fileext='.txt')
+helio.disco(tempfile_name, format='json')
+
 }

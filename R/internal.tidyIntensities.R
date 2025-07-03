@@ -4,20 +4,7 @@
 #' @inheritParams internal.calibCombine
 #'
 #' @return Maxtrix of intensities which are integers and capped at the maximum possible intensity
-#'
-#' @examples
-#'
-#' # Generate untidy intensities
-#' intensities = matrix(runif(n=10*8, min=-1, max=1020), nrow=8)
-#' print(intensities)
-#'
-#' # Get vector of unique calibration intensities
-#' calib = unique(LightFitR::calibration$intensity)
-#' print(calib)
-#'
-#' # Run function
-#'
-#' internal.tidyIntensities(intensities, calib)
+#' @keywords internal
 #'
 internal.tidyIntensities = function(intensities_matrix, calibration_intensities){
 

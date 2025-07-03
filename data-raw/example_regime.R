@@ -2,12 +2,11 @@
 
 # Import data
 timeVec = LightFitR::time_vector
-intensities = LightFitR::example_intensities
+target = LightFitR::target_irradiance
+calib = LightFitR::calibration
 
 # Put together into regime
 
-timeMat = LightFitR::internal.makeTimes(timeVec)
-
-example_regime = rbind(timeMat, intensities)
+example_regime = LightFitR::makeRegime(timeVec, target, calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 
 usethis::use_data(example_regime, overwrite = TRUE)

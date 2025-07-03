@@ -4,10 +4,10 @@
 \alias{internal.makeTimes}
 \title{Internal function. Takes vector of timepoints (POSICxt format) and converts into format readable by heliospectra.}
 \usage{
-internal.makeTimes(timeVector_POSICxt)
+internal.makeTimes(timeVector_POSIXct)
 }
 \arguments{
-\item{timeVector_POSICxt}{Vector of schedule timepoints in POSICxt format}
+\item{timeVector_POSIXct}{Vector of schedule timepoints in POSICxt format}
 }
 \value{
 Matrix of times. Each row corresponds to hours, minutes, seconds
@@ -15,3 +15,4 @@ Matrix of times. Each row corresponds to hours, minutes, seconds
 \description{
 Internal function. Takes vector of timepoints (POSICxt format) and converts into format readable by heliospectra.
 }
+\keyword{internal}

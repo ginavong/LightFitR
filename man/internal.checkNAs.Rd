@@ -15,3 +15,4 @@ Boolean: TRUE = pass, FALSE = fail
 \description{
 Internal function to check matrix for NAs
 }
+\keyword{internal}

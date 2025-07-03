@@ -26,3 +26,4 @@ Correctly formatted dataframe of calibration data, for use in other functions
 \description{
 Internal function to make a calibration dataframe from user-supplied vectors of calibration data
 }
+\keyword{internal}

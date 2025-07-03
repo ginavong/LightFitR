@@ -8,10 +8,7 @@
 #' @import stringr
 #'
 #' @return Correctly formatted dataframe of calibration data, for use in other functions
-#'
-#' @examples
-#' calib <- LightFitR::calibration
-#' internal.calibCombine(calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+#' @keywords internal
 #'
 internal.calibCombine = function(calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances){
 

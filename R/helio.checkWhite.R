@@ -5,13 +5,11 @@
 #' @param irradiance_matrix Matrix of intended irradiances. rows = leds and columns = events
 #'
 #' @return Boolean: TRUE = pass, FALSE = fail
-#' @export
+#' @keywords internal
 #'
-#' @examples
-#' helio.checkWhite(LightFitR::target_irradiance)
 #'
 helio.checkWhite = function(irradiance_matrix){
-  if(unique(irradiance_matrix[9,]) ==0){
+  if(all(unique(irradiance_matrix[9,]) ==0)){
     return(TRUE)
   }
   else{
