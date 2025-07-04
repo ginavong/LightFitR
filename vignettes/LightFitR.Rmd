@@ -14,7 +14,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, include=FALSE}
 library(LightFitR)
 ```
 
@@ -30,10 +30,14 @@ It takes calibration data and user-defined target irradiances and it tells  you 
 
 ## Terminology
 
-This packages uses 'intensity' to mean the unitless settings that the light fixture uses.
+This package uses 'intensity' to mean the unitless settings that the light fixture uses.
+
 'irradiance' means the measured light output from the fixture.This can be in the users' preferred light units, provided it is used consistently throughout.
+
 'regime' refers to a repeating daily schedule that the light fixtures run on.
+
 'event' refers to the point in the light regime when the lights change intensity.
+
 
 # Getting started
 
@@ -112,6 +116,7 @@ write.helioSchedule(regime, filename='my_regime.txt', format='json')
 If you do not use this model of light, you can still write the regime matrix to a csv.
 Or you're very welcome to write your own function to format the regime to be compatible with your model of lights!
 
+
 # How it works
 
 `makeRegime` is the core user-facing function in this package.
@@ -161,7 +166,7 @@ target_first <- target[,1]
 print(target_first)
 
 # Go through each channel of the first event
-sapply(1:length(closest_first), function(i){
+sanity_check <- sapply(1:length(closest_first), function(i){
   
   ## Set relevant variables
   tar <- target_first[i]
@@ -182,6 +187,7 @@ sapply(1:length(closest_first), function(i){
   
   return()
 })
+rm(sanity_check)
 
 ```
 
@@ -202,6 +208,8 @@ peakWavelengths <- LightFitR:::internal.closestWavelength(unique(calibration$wav
 firstEvent <- data.frame(led=LightFitR::helio.dyna.leds[-9, 'wavelength'], closest=closest_first[-9], intended=target_first[-9])
 rm(closest_first, target_first)
 
+# closest matrix
+
 mat <- sapply(1:nrow(firstEvent), function(j){
   criteria <- (calibration$led == firstEvent[j, 'led']) & (calibration$intensity == firstEvent[j, 'closest']) & (calibration$wavelength %in% peakWavelengths) # We want the irradiances (from calibration data) of each LED at the intensity where it is closest to the intended irradiance
   calibration[criteria, 'irradiance']
@@ -216,7 +224,7 @@ The leading diagonal is quite intense (which is what we want!).
 But as you can see, there is some bleedthrough between the channels, indicated by colour outside the leading diagonal.
 
 Next, we make a model either using NNLS or SLE (more on the differences below). 
-It solves the equation Ax=b, where A is the irradiance matrix (above), b are the target irradiances and x are unknown coefficients.
+It solves the equation Ax=b, where A is the closest irradiance matrix (above), b are the target irradiances and x are unknown coefficients.
 
 For the first event, it looks like this:
 
@@ -225,7 +233,7 @@ mod <- nnls::nnls(mat, firstEvent[,'intended'])
 print(mod)
 ```
 
-Finally, we use the coefficients (solved by the model) as well as the closest intensities to calculate the intensities we need to set the lights to:
+Finally, we use the coefficients (x, solved by the model) as well as the closest intensities to calculate the intensities we need to set the lights to:
 
 ```{r}
 intensities <- mod$x * firstEvent[, 'closest']
@@ -256,6 +264,7 @@ This final step just takes the resultant matrix and makes it more human readable
 It adds row and column names, as well as the event timepoints.
 You can't really show it with just the first event, and you already saw the tidied matrix in the 'get started' example.
 So there isn't really any code to show for this step...
+
 
 # System of linear equations (SLE) vs Non-negative least squares (NNLS)
 
