@@ -1,0 +1,30 @@
+calibration             calibration data
+checkRange              Check that the intended irradiances are
+                        acheivable by the lights
+example_closest         closest intensities
+example_intensities     example intensities
+example_regime          regime matrix
+helio.checkFormat       Check formatting of the heliospectra matrices
+helio.csv_schedule      Format regime_matrix for csv output that
+                        Heliospectra lights can parse
+helio.disco             Turn Heliospectra into disco lights
+helio.dyna.leds         heliospectra DYNA LEDs
+helio.eventLimit        Maximum number of events
+helio.json_schedule     Format regime_matrix for json output that
+                        Heliospectra lights can parse
+internal.closestIntensities
+                        Internal function. Find the intensities
+                        corresponding to the closest irradiance match
+                        between intended and calibration.
+makeRegime              Create a regime (matrix) to program lights to
+                        achieve intended irradiances
+nnls_intensities        Use non-linear least squares to interpolate
+                        intensities
+read.helio_json         Read a heliospectra script (json format) into a
+                        matrix.
+sle_intensities         Use a system of linear equations to calculate
+                        intensities
+target_irradiance       target irradiances
+time_vector             time vector
+write.helioSchedule     Write the schedule to file that Heliospectra
+                        can parse
