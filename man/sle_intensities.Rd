@@ -42,6 +42,7 @@ closest = LightFitR::example_closest
 calib = LightFitR::calibration
 
 # Run the function
-sle_intensities(target_irradiance, closest,  calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+sle_intensities(target_irradiance, closest,
+  calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 
 }

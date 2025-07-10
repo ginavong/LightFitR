@@ -11,7 +11,8 @@
 #'
 #' # Format calibration data correctly
 #' calib <- LightFitR::calibration
-#' calib <- LightFitR:::internal.calibCombine(calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+#' calib <- LightFitR:::internal.calibCombine(calib$led, calib$wavelength,
+#'   calib$intensity, calib$irradiance)
 #'
 #' # Run function
 #' internal.closestIntensities(LightFitR::target_irradiance, calib)

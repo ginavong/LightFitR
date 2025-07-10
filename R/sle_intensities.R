@@ -16,7 +16,8 @@
 #' calib = LightFitR::calibration
 #'
 #' # Run the function
-#' sle_intensities(target_irradiance, closest,  calib$led, calib$wavelength, calib$intensity, calib$irradiance)
+#' sle_intensities(target_irradiance, closest,
+#'   calib$led, calib$wavelength, calib$intensity, calib$irradiance)
 #'
 sle_intensities = function(irradiance_matrix, closest_intensities, calibration_leds, calibration_wavelengths, calibration_intensities, calibration_irradiances, peaks=LightFitR::helio.dyna.leds$wavelength){
 
