@@ -22,7 +22,7 @@ internal.calibCombine = function(calibration_leds, calibration_wavelengths, cali
 
   # Remove any letters (e.g. 'nm') from leds, ensuring they are numeric for next steps
   calibListNumeric = lapply(calibList, function(l){
-    if(class(l) == 'numeric' | class(l) == 'integer'){
+    if(inherits(l, c('integer', 'numeric'))){
       l
     }
     else{
