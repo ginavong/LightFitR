@@ -1,3 +1,9 @@
+## Resubmission
+
+This is a resubmission. Changes:
+
+- Squashed a NOTE with if(class(x)=='integer') and used if(inherits(x, 'integer'))
+
 ## R CMD check results
 
 0 errors | 0 warnings | 2 notes
