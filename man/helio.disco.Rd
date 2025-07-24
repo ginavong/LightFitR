@@ -11,6 +11,9 @@ helio.disco(filename, format = c("csv", "json"))
 
 \item{format}{Character. Which format to export to? csv or json. Use extensions '.csv' or '.txt'}
 }
+\value{
+Disco schedule file for the heliospectra
+}
 \description{
 Congratulations! You've found the easter egg function!
 }

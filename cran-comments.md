@@ -2,7 +2,8 @@
 
 This is a resubmission. Changes:
 
-- Squashed a NOTE with if(class(x)=='integer') and used if(inherits(x, 'integer'))
+- Fixed description field of DESCRIPTION file
+- Fixed documentation issues in helio.disco.Rd, write.helioSchedule.Rd, internal.closestIntensities.Rd
 
 ## R CMD check results
 

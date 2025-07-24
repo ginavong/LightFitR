@@ -8,6 +8,7 @@
 #' @inheritParams write.helioSchedule
 #'
 #' @import lubridate
+#' @return Disco schedule file for the heliospectra
 #'
 #' @export
 #'

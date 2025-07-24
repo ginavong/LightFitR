@@ -13,6 +13,9 @@ write.helioSchedule(regime_matrix, filename, format = c("csv", "json"))
 
 \item{format}{Character. Which format to export to? csv or json. Use extensions '.csv' or '.txt'}
 }
+\value{
+Heliospectra schedule file in either the csv or json format
+}
 \description{
 Writes to json or csv format
 }

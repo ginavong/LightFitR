@@ -7,6 +7,7 @@
 #' @param format Character. Which format to export to? csv or json. Use extensions '.csv' or '.txt'
 #'
 #' @importFrom utils write.table
+#' @return Heliospectra schedule file in either the csv or json format
 #'
 #' @export
 #'
